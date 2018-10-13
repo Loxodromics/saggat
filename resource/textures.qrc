@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>textures/sky.png</file>
+        <file>textures/planet.jpg</file>
     </qresource>
 </RCC>

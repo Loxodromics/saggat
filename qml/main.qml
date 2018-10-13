@@ -21,6 +21,10 @@ Window {
         focus: true
         aspects: ["input", "logic"]
         cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
+
+        SceneRoot {
+            id: sceneRoot
+        }
     }
 
     Button {
@@ -31,5 +35,9 @@ Window {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
+
+        onClicked: {
+            sceneRoot.generate()
+        }
     }
 }

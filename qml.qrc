@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
+        <file>qml/Planet.qml</file>
+        <file>qml/SceneRoot.qml</file>
+        <file>qml/PlanetarySystem.qml</file>
     </qresource>
 </RCC>
