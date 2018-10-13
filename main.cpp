@@ -1,8 +1,8 @@
 //
-//  %{Cpp:License:FileName}
-//  %PROJECT_NAME%
+//  main.cpp
+//  Sagget
 //
-//  Created by philipp2 on 13.10.2018.
+//  Created by philipp on 13.10.2018.
 //  Copyright (c) 2018 Philipp Engelhard. All rights reserved.
 //
 #include <QGuiApplication>
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	QGuiApplication app(argc, argv);
 
 	QQmlApplicationEngine engine;
-	engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+	engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 	if (engine.rootObjects().isEmpty())
 		return -1;
 
