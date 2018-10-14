@@ -12,7 +12,9 @@ Window {
 
     Image {
         id: backdrop
+        fillMode: Image.PreserveAspectCrop
         source: "qrc:/textures/sky.png"
+        anchors.fill: parent
     }
 
     Scene3D {
