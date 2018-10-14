@@ -14,9 +14,14 @@ Entity {
         upVector: Qt.vector3d(0.0, 1.0, 0.0)
     }
 
+    Ring {
+        id: ring
+    }
+
     function generate() {
         planet.radius = 7 + Math.random() * 6
         planet.rotationDuration = 10000 + Math.random() * 30000
         planet.generate()
+        ring.generate()
     }
 }

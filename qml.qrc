@@ -4,5 +4,7 @@
         <file>qml/Planet.qml</file>
         <file>qml/SceneRoot.qml</file>
         <file>qml/PlanetarySystem.qml</file>
+        <file>qml/Rock.qml</file>
+        <file>qml/Ring.qml</file>
     </qresource>
 </RCC>
