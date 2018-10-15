@@ -5,6 +5,7 @@ import Qt3D.Extras 2.0
 import QtQuick 2.0 as QQ2
 
 Entity {
+    id: root
 
     property real radius: 10
     property real rotationDuration: 30000
@@ -45,8 +46,7 @@ Entity {
         id: sphereMesh
 
         generateTangents: true
-        radius: 0.0001
-
+        radius: root.radius
     }
 
     Transform {
@@ -71,21 +71,6 @@ Entity {
         running: true
     }
 
-    QQ2.NumberAnimation {
-        id: sizeAnimation
-        target: sphereMesh
-        property: "radius"
-        duration: 1600
-
-        from: 0.0001
-        to: radius
-
-        easing.type: Easing.OutElastic
-
-        running: true
-        loops: 1
-    }
-
     Entity {
         id: sphereEntity
         components: [ sphereMesh, planetMaterial, sphereTransform ]
@@ -95,7 +80,6 @@ Entity {
         if (Math.random() < 0.5) {
             rotationTarget *= -1
         }
-        sizeAnimation.restart()
     }
 
 }

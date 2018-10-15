@@ -18,6 +18,33 @@ Entity {
         id: ring
     }
 
+    Transform {
+        id: sizeTransform
+        property real size: 0.0
+        matrix: {
+            var m = Qt.matrix4x4();
+            m.scale(size)
+            return m;
+        }
+    }
+
+    QQ2.NumberAnimation {
+        id: sizeAnimation
+        target: sizeTransform
+        property: "size"
+        duration: 1600
+
+        from: 0.0001
+        to: 1.0
+
+        easing.type: Easing.OutElastic
+
+        running: true
+        loops: 1
+    }
+
+    components: [ sizeTransform ]
+
     function generate() {
         planet.radius = 7 + Math.random() * 6
         planet.rotationDuration = 10000 + Math.random() * 30000
@@ -26,5 +53,7 @@ Entity {
         ring.numberOfRocks = Math.random() * 200 + 100
         ring.orbitalDistance = Math.random() * 20 + 10
         ring.generate()
+
+        sizeAnimation.restart()
     }
 }
