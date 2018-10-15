@@ -10,29 +10,15 @@ Entity {
     property real orbitalDistance: 20
     property real size: 0.4
     property real angle: 20
+    property color rockColor: Qt.hsla( Math.random(), 0.8, 0.6, 1.0)
+
 
     PhongMaterial {
-        id: material
-    }
-
-    TextureMaterial {
         id: rockMaterial
-
-        texture: Texture2D {
-            id: rockTexture
-            minificationFilter: Texture.LinearMipMapLinear
-            magnificationFilter: Texture.Linear
-            wrapMode {
-                x: WrapMode.Repeat
-                y: WrapMode.Repeat
-            }
-            generateMipMaps: true
-            maximumAnisotropy: 16.0
-            TextureImage {
-                id: rockTextureImage
-                source: "qrc:/textures/rock.jpg"
-            }
-        }
+        ambient: Qt.rgba( 0.2, 0.2, 0.2, 1.0 )
+        diffuse: rockColor
+        specular: Qt.rgba( 0.9, 0.9, 0.9, 1.0 )
+        shininess: 0.9
     }
 
     SphereMesh {
@@ -40,7 +26,8 @@ Entity {
 
         generateTangents: true
         radius: size
-
+        slices: 5
+        rings: 5
     }
 
     Transform {

@@ -18,6 +18,10 @@ Entity {
         id: ring
     }
 
+    Ring {
+        id: ring2
+    }
+
     Transform {
         id: sizeTransform
         property real size: 0.0
@@ -50,12 +54,33 @@ Entity {
         planet.rotationDuration = 5000 + Math.random() * 40000
         planet.generate()
 
-        ring.orbitalDistance = Math.random() * 20 + planet.radius
-        ring.numberOfRocks = ring.orbitalDistance * 50 // Math.random() * 200 + 100
-        ring.ringAxis = Math.random()
-        ring.ringAngle = Math.random() * 180 - 90
-
+        if ( 0.25 < Math.random() ) {
+            /// random chance to have a first ring
+            ring.ringWidth = Math.random() * 5.0 + 1.0
+            ring.orbitalDistance = Math.random() * 14 + planet.radius
+            ring.numberOfRocks = ring.orbitalDistance * 10 * ring.ringWidth // Math.random() * 200 + 100
+            ring.ringAxis = Math.random()
+            ring.ringAngle = Math.random() * 180 - 90
+            ring.color = Qt.hsla( Math.random(), 0.8, 0.6, 1.0 )
+        }
+        else {
+            ring.numberOfRocks = 0
+        }
         ring.generate()
+
+        if ( 0.25 > Math.random() ) {
+            /// random chance to have a second ring
+            ring2.ringWidth = Math.random() * 5.0 + 1.0
+            ring2.orbitalDistance = Math.random() * 18 + planet.radius
+            ring2.numberOfRocks = ring.orbitalDistance * 10 * ring2.ringWidth// Math.random() * 200 + 100
+            ring2.ringAxis = Math.random()
+            ring2.ringAngle = Math.random() * 180 - 90
+            ring2.color = Qt.hsla( Math.random(), 0.8, 0.6, 1.0 )
+        }
+        else {
+            ring2.numberOfRocks = 0
+        }
+        ring2.generate()
 
         sizeAnimation.restart()
     }

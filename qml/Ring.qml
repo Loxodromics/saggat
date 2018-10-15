@@ -6,12 +6,13 @@ import QtQuick 2.11 as QQ2
 Entity {
     id: ring
 
-    property real beltWidth: 4.0
+    property real ringWidth: 4.0
     property real rockSize: 0.333
     property real orbitalDistance: 23
     property int numberOfRocks: 150
     property real ringAngle: 10
     property real ringAxis: 0.3
+    property color color: Qt.hsla( Math.random(), 0.8, 0.6, 1.0 )
 
     property variant rockComponent: Qt.createComponent("Rock.qml");
     property var rocks: []
@@ -52,11 +53,13 @@ Entity {
 
             var rockmodel = rockComponent.createObject(ring, {
                 "size": Math.random() * rockSize,
-                "orbitalDistance:": orbitalDistance + Math.random() * beltWidth, /// not working
-                "angle": Math.random() * 360
+                "orbitalDistance:": orbitalDistance + Math.random() * ringWidth, /// not working
+                "angle": Math.random() * 360,
+                "rockColor": color
+
             });
 
-            rockmodel.orbitalDistance = orbitalDistance + Math.random() * beltWidth
+            rockmodel.orbitalDistance = orbitalDistance + Math.random() * ringWidth
 
             rocks.push(rockmodel)
         }
