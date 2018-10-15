@@ -10,6 +10,8 @@ Entity {
     property real rockSize: 0.333
     property real orbitalDistance: 23
     property int numberOfRocks: 150
+    property real ringAngle: 10
+    property real ringAxis: 0.3
 
     property variant rockComponent: Qt.createComponent("Rock.qml");
     property var rocks: []
@@ -23,6 +25,7 @@ Entity {
         property real rotationAngle: 0.0
         matrix: {
             var m = Qt.matrix4x4();
+            m.rotate(ringAngle, Qt.vector3d(ringAxis, 0, 1.0 - ringAxis));
             m.rotate(rotationAngle, Qt.vector3d(0, 1, 0));
             return m;
         }

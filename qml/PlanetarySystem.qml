@@ -51,7 +51,10 @@ Entity {
         planet.generate()
 
         ring.orbitalDistance = Math.random() * 20 + planet.radius
-        ring.numberOfRocks = ring.orbitalDistance * 50 //Math.random() * 200 + 100
+        ring.numberOfRocks = ring.orbitalDistance * 50 // Math.random() * 200 + 100
+        ring.ringAxis = Math.random()
+        ring.ringAngle = Math.random() * 180 - 90
+
         ring.generate()
 
         sizeAnimation.restart()
