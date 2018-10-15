@@ -9,6 +9,7 @@ Entity {
     property real beltWidth: 4.0
     property real rockSize: 0.333
     property real orbitalDistance: 23
+    property int numberOfRocks: 150
 
     property variant rockComponent: Qt.createComponent("Rock.qml");
     property var rocks: []
@@ -21,10 +22,7 @@ Entity {
 
         clearRocks()
 
-        var max = Math.random() * 200 + 100
-        var orbitalDistance = Math.random() * 20 + 10
-
-        for (var i = 0; i < max; i++) {
+        for (var i = 0; i < numberOfRocks; i++) {
 
             var rockmodel = rockComponent.createObject(ring, {
                 "size": Math.random() * rockSize,
