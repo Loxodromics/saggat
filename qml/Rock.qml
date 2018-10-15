@@ -50,20 +50,8 @@ Entity {
             var m = Qt.matrix4x4();
             m.rotate(userAngle + angle, Qt.vector3d(0, 1, 0));
             m.translate(Qt.vector3d(orbitalDistance, 0, 0));
-//            console.log("orbitalDistance: " + orbitalDistance)
             return m;
         }
-    }
-
-    QQ2.NumberAnimation {
-        target: rockTransform
-        property: "userAngle"
-        duration: 5000 + Math.random() * 1000
-        from: 0
-        to: 360
-
-        loops: QQ2.Animation.Infinite
-        running: true
     }
 
     Entity {

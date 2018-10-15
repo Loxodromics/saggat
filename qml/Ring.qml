@@ -18,6 +18,29 @@ Entity {
         generate()
     }
 
+    Transform {
+        id: ringTransform
+        property real rotationAngle: 0.0
+        matrix: {
+            var m = Qt.matrix4x4();
+            m.rotate(rotationAngle, Qt.vector3d(0, 1, 0));
+            return m;
+        }
+    }
+
+    QQ2.NumberAnimation {
+        target: ringTransform
+        property: "rotationAngle"
+        duration: 5000 + Math.random() * 1000
+        from: 0
+        to: 360
+
+        loops: QQ2.Animation.Infinite
+        running: true
+    }
+
+    components: [ ringTransform ]
+
     function generate() {
 
         clearRocks()
