@@ -50,8 +50,9 @@ Entity {
     components: [ sizeTransform ]
 
     function generate() {
-        planet.radius = 2 + Math.random() * 6
-        planet.rotationDuration = 5000 + Math.random() * 40000
+        planet.radius = Generator.planetRadius()
+        planet.rotationDuration = Generator.planetRotationDuration()
+        console.log("planet.radius: " + planet.radius + " planet.rotationDuration: " + planet.rotationDuration)
         planet.generate()
 
         if ( 0.25 < Math.random() ) {
