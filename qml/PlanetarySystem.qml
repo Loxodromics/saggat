@@ -57,12 +57,13 @@ Entity {
 
         if ( 0.25 < Math.random() ) {
             /// random chance to have a first ring
-            ring.ringWidth = Math.random() * 5.0 + 1.0
-            ring.orbitalDistance = Math.random() * 14 + planet.radius
-            ring.numberOfRocks = ring.orbitalDistance * 10 * ring.ringWidth // Math.random() * 200 + 100
-            ring.ringAxis = Math.random()
-            ring.ringAngle = Math.random() * 180 - 90
-            ring.color = Qt.hsla( Math.random(), 0.8, 0.6, 1.0 )
+            ring.ringWidth = Generator.ringWidth()
+            ring.orbitalDistance = Generator.ringOrbitalDistance(planet.radius)
+            ring.numberOfRocks = Generator.ringNumberOfRocks(ring.ringWidth, ring.orbitalDistance)
+            ring.ringAxis = Generator.ringAxis()
+            ring.ringAngle = Generator.ringAngle()
+            ring.color = Generator.ringColor()
+            ring.printValues()
         }
         else {
             ring.numberOfRocks = 0
@@ -71,12 +72,13 @@ Entity {
 
         if ( 0.25 > Math.random() ) {
             /// random chance to have a second ring
-            ring2.ringWidth = Math.random() * 5.0 + 1.0
-            ring2.orbitalDistance = Math.random() * 18 + planet.radius
-            ring2.numberOfRocks = ring.orbitalDistance * 10 * ring2.ringWidth// Math.random() * 200 + 100
-            ring2.ringAxis = Math.random()
-            ring2.ringAngle = Math.random() * 180 - 90
-            ring2.color = Qt.hsla( Math.random(), 0.8, 0.6, 1.0 )
+            ring2.ringWidth = Generator.ringWidth()
+            ring2.orbitalDistance = Generator.ringOrbitalDistance(planet.radius)
+            ring2.numberOfRocks = Generator.ringNumberOfRocks(ring.ringWidth, ring.orbitalDistance)
+            ring2.ringAxis = Generator.ringAxis()
+            ring2.ringAngle = Generator.ringAngle()
+            ring2.color = Generator.ringColor()
+            ring2.printValues()
         }
         else {
             ring2.numberOfRocks = 0

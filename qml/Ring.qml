@@ -71,4 +71,14 @@ Entity {
         }
         rocks = []
     }
+
+    function printValues() {
+        console.log( "ringWidth: " + ringWidth +
+                     " rockSize: " + rockSize +
+                     " orbitalDistance: " + orbitalDistance +
+                     " numberOfRocks: " + numberOfRocks +
+                     " ringAngle: " + ringAngle +
+                     " ringAxis: " + ringAxis +
+                     " color: " + color)
+    }
 }

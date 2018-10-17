@@ -9,6 +9,7 @@
 #define SAGGAT_GENERATOR_H
 
 #include <QObject>
+#include <QColor>
 #include <random>
 
 namespace Saggat {
@@ -26,6 +27,12 @@ public:
 
 	Q_INVOKABLE qreal planetRadius();
 	Q_INVOKABLE int planetRotationDuration();
+	Q_INVOKABLE qreal ringWidth();
+	Q_INVOKABLE qreal ringOrbitalDistance(qreal offset);
+	Q_INVOKABLE int ringNumberOfRocks(qreal ringWidth, qreal orbitalDistance);
+	Q_INVOKABLE qreal ringAxis();
+	Q_INVOKABLE qreal ringAngle();
+	Q_INVOKABLE QColor ringColor();
 
 protected:
 //	std::random_device m_randomDevice;
