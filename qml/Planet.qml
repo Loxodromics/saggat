@@ -77,6 +77,7 @@ Entity {
     }
 
     function generate() {
+        /// randomly change rotation direction
         if (Math.random() < 0.5) {
             rotationTarget *= -1
         }

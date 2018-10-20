@@ -101,4 +101,11 @@ qreal Generator::rockColor(qreal base)
 	return dist(this->m_gen);
 }
 
+qreal Generator::rockOrbitalDistance(qreal base)
+{
+	std::uniform_real_distribution<> dist{base - Values::getInstance().rockOrbitalDistanceVariance(),
+										  base + Values::getInstance().rockOrbitalDistanceVariance()};
+	return dist(this->m_gen);
+}
+
 } // namespace Saggat

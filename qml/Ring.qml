@@ -58,13 +58,13 @@ Entity {
 
             var rockmodel = rockComponent.createObject(ring, {
                 "size": Generator.rockSize(),
-                "orbitalDistance:": orbitalDistance + Math.random() * ringWidth, /// not working
+                "orbitalDistance:": 1234, /// not working
                 "angle": Math.random() * 360,
                 "height": Generator.rockHeight(),
                 "rockColor": Qt.lighter(color, Generator.rockColor(0.5))
             });
 
-            rockmodel.orbitalDistance = orbitalDistance + Math.random() * ringWidth
+            rockmodel.orbitalDistance = Generator.rockOrbitalDistance(orbitalDistance)
 
             rocks.push(rockmodel)
         }

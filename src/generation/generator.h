@@ -39,6 +39,7 @@ public:
 	Q_INVOKABLE qreal rockSize();
 	Q_INVOKABLE qreal rockHeight();
 	Q_INVOKABLE qreal rockColor(qreal base);
+	Q_INVOKABLE qreal rockOrbitalDistance(qreal base);
 
 protected:
 //	std::random_device m_randomDevice;
