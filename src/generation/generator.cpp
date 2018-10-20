@@ -29,7 +29,7 @@ int Generator::planetRotationDuration()
 {
 	std::normal_distribution<> dist{double(Values::getInstance().planetBaseRotationDuration()),
 				double(Values::getInstance().planetRotationDurationVariance())};
-	return qMax(int(std::trunc(dist(this->m_gen))), Values::getInstance().planetMinRotationDuration());
+	return qMax(int(std::floor(dist(this->m_gen))), Values::getInstance().planetMinRotationDuration());
 }
 
 qreal Generator::ringWidth()
@@ -49,7 +49,8 @@ qreal Generator::ringOrbitalDistance(qreal offset)
 int Generator::ringNumberOfRocks(qreal ringWidth, qreal orbitalDistance)
 {
 	//TODO: some randomness
-	return int(std::trunc(ringWidth * orbitalDistance * Values::getInstance().ringDensityFactor() * Values::getInstance().ringDensityFactor()));
+	return int(std::floor(ringWidth * orbitalDistance *
+						  Values::getInstance().ringDensityFactor() * Values::getInstance().ringDensityFactor()));
 }
 
 qreal Generator::ringAxis()
@@ -70,6 +71,34 @@ QColor Generator::ringColor()
 	QColor color;
 	color.setHslF(dist(this->m_gen), 0.8, 0.6);
 	return color;
+}
+
+qreal Generator::ringRotationDuration()
+{
+	std::normal_distribution<> dist{Values::getInstance().ringBaseRotationTime(),
+				Values::getInstance().ringRotationTimeVariance()};
+	return qMax(dist(this->m_gen), 1000.0);
+}
+
+qreal Generator::rockSize()
+{
+	std::normal_distribution<> dist{Values::getInstance().rockBaseSize(),
+				Values::getInstance().rockSizeVariance()};
+	return qMax(dist(this->m_gen), 0.01);
+}
+
+qreal Generator::rockHeight()
+{
+	std::normal_distribution<> dist{0.0,
+				Values::getInstance().rockHeightVariance()};
+	return dist(this->m_gen);
+}
+
+qreal Generator::rockColor(qreal base)
+{
+	std::normal_distribution<> dist{base,
+									Values::getInstance().rockColorVariance()};
+	return dist(this->m_gen);
 }
 
 } // namespace Saggat

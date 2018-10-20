@@ -27,12 +27,18 @@ public:
 
 	Q_INVOKABLE qreal planetRadius();
 	Q_INVOKABLE int planetRotationDuration();
+
 	Q_INVOKABLE qreal ringWidth();
 	Q_INVOKABLE qreal ringOrbitalDistance(qreal offset);
 	Q_INVOKABLE int ringNumberOfRocks(qreal ringWidth, qreal orbitalDistance);
 	Q_INVOKABLE qreal ringAxis();
 	Q_INVOKABLE qreal ringAngle();
 	Q_INVOKABLE QColor ringColor();
+	Q_INVOKABLE qreal ringRotationDuration();
+
+	Q_INVOKABLE qreal rockSize();
+	Q_INVOKABLE qreal rockHeight();
+	Q_INVOKABLE qreal rockColor(qreal base);
 
 protected:
 //	std::random_device m_randomDevice;

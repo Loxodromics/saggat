@@ -35,6 +35,14 @@ public:
 	Q_PROPERTY(qreal ringOrbitalDistanceVariance READ ringOrbitalDistanceVariance WRITE setRingOrbitalDistanceVariance NOTIFY ringOrbitalDistanceVarianceChanged)
 	Q_PROPERTY(qreal ringDensityFactor READ ringDensityFactor WRITE setRingDensityFactor NOTIFY ringDensityFactorChanged)
 	Q_PROPERTY(QColor ringBaseColor READ ringBaseColor WRITE setRingBaseColor NOTIFY ringBaseColorChanged)
+	Q_PROPERTY(qreal ringBaseRotationTime READ ringBaseRotationTime WRITE setRingBaseRotationTime NOTIFY ringBaseRotationTimeChanged)
+	Q_PROPERTY(qreal ringRotationTimeVariance READ ringRotationTimeVariance WRITE setRingRotationTimeVariance NOTIFY ringRotationTimeVarianceChanged)
+
+	Q_PROPERTY(qreal rockBaseSize READ rockBaseSize WRITE setRockBaseSize NOTIFY rockBaseSizeChanged)
+	Q_PROPERTY(qreal rockSizeVariance READ rockSizeVariance WRITE setRockSizeVariance NOTIFY rockSizeVarianceChanged)
+	Q_PROPERTY(qreal rockOrbitalDistanceVariance READ rockOrbitalDistanceVariance WRITE setRockOrbitalDistanceVariance NOTIFY rockOrbitalDistanceVarianceChanged)
+	Q_PROPERTY(qreal rockHeightVariance READ rockHeightVariance WRITE setRockHeightVariance NOTIFY rockHeightVarianceChanged)
+	Q_PROPERTY(qreal rockColorVariance READ rockColorVariance WRITE setRockColorVariance NOTIFY rockColorVarianceChanged)
 
 	qreal planetBaseRadius() const;
 	qreal planetRadiusVariance() const;
@@ -47,6 +55,13 @@ public:
 	qreal ringOrbitalDistanceVariance() const;
 	qreal ringDensityFactor() const;
 	QColor ringBaseColor() const;
+	qreal ringBaseRotationTime() const;
+	qreal ringRotationTimeVariance() const;
+	qreal rockBaseSize() const;
+	qreal rockSizeVariance() const;
+	qreal rockOrbitalDistanceVariance() const;
+	qreal rockHeightVariance() const;
+	qreal rockColorVariance() const;
 
 
 public slots:
@@ -61,7 +76,13 @@ public slots:
 	void setRingOrbitalDistanceVariance(qreal ringOrbitalDistanceVariance);
 	void setRingDensityFactor(qreal ringDensityFactor);
 	void setRingBaseColor(QColor ringBaseColor);
-
+	void setRockBaseSize(qreal rockBaseSize);
+	void setRockSizeVariance(qreal rockSizeVariance);
+	void setRockOrbitalDistanceVariance(qreal rockOrbitalDistanceVariance);
+	void setRockHeightVariance(qreal rockHeightVariance);
+	void setRockColorVariance(qreal rockColorVariance);
+	void setRingBaseRotationTime(qreal ringBaseRotationTime);
+	void setRingRotationTimeVariance(qreal ringRotationTimeVariance);
 
 signals:
 	void planetBaseRadiusChanged(qreal planetBaseRadius);
@@ -75,7 +96,15 @@ signals:
 	void ringOrbitalDistanceVarianceChanged(qreal ringOrbitalDistanceVariance);
 	void ringDensityFactorChanged(qreal ringDensityFactor);
 	void ringBaseColorChanged(QColor ringBaseColor);
+	void rockBaseSizeChanged(qreal rockBaseSize);
+	void rockSizeVarianceChanged(qreal rockSizeVariance);
+	void rockOrbitalDistanceVarianceChanged(qreal rockOrbitalDistanceVariance);
+	void rockHeightVarianceChanged(qreal rockHeightVariance);
+	void rockColorVarianceChanged(qreal rockColorVariance);
 
+	void ringBaseRotationTimeChanged(qreal ringBaseRotationTime);
+
+	void ringRotationTimeVarianceChanged(qreal ringRotationTimeVariance);
 
 protected:
 	qreal m_planetBaseRadius;
@@ -89,6 +118,13 @@ protected:
 	qreal m_ringOrbitalDistanceVariance;
 	qreal m_ringDensityFactor;
 	QColor m_ringBaseColor;
+	qreal m_ringBaseRotationTime;
+	qreal m_ringRotationTimeVariance;
+	qreal m_rockBaseSize;
+	qreal m_rockSizeVariance;
+	qreal m_rockOrbitalDistanceVariance;
+	qreal m_rockHeightVariance;
+	qreal m_rockColorVariance;
 
 private:
 	explicit Values(QObject *parent = nullptr);

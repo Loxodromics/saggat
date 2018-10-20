@@ -21,7 +21,13 @@ Values::Values(QObject *parent)
 	  m_ringOrbitalDistance(7.0),
 	  m_ringOrbitalDistanceVariance(3.0),
 	  m_ringDensityFactor(3.0),
-	  m_ringBaseColor(QColor())
+	  m_ringBaseColor(QColor()),
+	  m_ringBaseRotationTime(8000),
+	  m_ringRotationTimeVariance(2000),
+	  m_rockBaseSize(0.5),
+	  m_rockSizeVariance(0.15),
+	  m_rockHeightVariance(0.25),
+	  m_rockColorVariance(0.1)
 {
 
 }
@@ -179,6 +185,16 @@ void Values::setRingDensityFactor(qreal ringDensityFactor)
 	emit ringDensityFactorChanged(this->m_ringDensityFactor);
 }
 
+void Values::setRingRotationTimeVariance(qreal ringRotationTimeVariance)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_ringRotationTimeVariance, ringRotationTimeVariance))
+		return;
+
+	this->m_ringRotationTimeVariance = ringRotationTimeVariance;
+	emit ringRotationTimeVarianceChanged(this->m_ringRotationTimeVariance);
+}
+
 void Values::setRingBaseColor(QColor ringBaseColor)
 {
 	if (this->m_ringBaseColor == ringBaseColor)
@@ -187,5 +203,101 @@ void Values::setRingBaseColor(QColor ringBaseColor)
 	this->m_ringBaseColor = ringBaseColor;
 	emit ringBaseColorChanged(this->m_ringBaseColor);
 }
+
+qreal Values::ringBaseRotationTime() const
+{
+	return this->m_ringBaseRotationTime;
+}
+
+qreal Values::ringRotationTimeVariance() const
+{
+	return this->m_ringRotationTimeVariance;
+}
+
+void Values::setRingBaseRotationTime(qreal ringBaseRotationTime)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_ringBaseRotationTime, ringBaseRotationTime))
+		return;
+
+	this->m_ringBaseRotationTime = ringBaseRotationTime;
+	emit ringBaseRotationTimeChanged(this->m_ringBaseRotationTime);
+}
+
+void Values::setRockBaseSize(qreal rockBaseSize)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_rockBaseSize, rockBaseSize))
+		return;
+
+	this->m_rockBaseSize = rockBaseSize;
+	emit rockBaseSizeChanged(this->m_rockBaseSize);
+}
+
+void Values::setRockSizeVariance(qreal rockSizeVariance)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_rockSizeVariance, rockSizeVariance))
+		return;
+
+	this->m_rockSizeVariance = rockSizeVariance;
+	emit rockSizeVarianceChanged(this->m_rockSizeVariance);
+}
+
+void Values::setRockOrbitalDistanceVariance(qreal rockOrbitalDistanceVariance)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_rockOrbitalDistanceVariance, rockOrbitalDistanceVariance))
+		return;
+
+	this->m_rockOrbitalDistanceVariance = rockOrbitalDistanceVariance;
+	emit rockOrbitalDistanceVarianceChanged(this->m_rockOrbitalDistanceVariance);
+}
+
+void Values::setRockHeightVariance(qreal rockHeightVariance)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_rockHeightVariance, rockHeightVariance))
+		return;
+
+	this->m_rockHeightVariance = rockHeightVariance;
+	emit rockHeightVarianceChanged(this->m_rockHeightVariance);
+}
+
+void Values::setRockColorVariance(qreal rockColorVariance)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_rockColorVariance, rockColorVariance))
+		return;
+
+	this->m_rockColorVariance = rockColorVariance;
+	emit rockColorVarianceChanged(this->m_rockColorVariance);
+}
+
+qreal Values::rockBaseSize() const
+{
+	return this->m_rockBaseSize;
+}
+
+qreal Values::rockSizeVariance() const
+{
+	return this->m_rockSizeVariance;
+}
+
+qreal Values::rockOrbitalDistanceVariance() const
+{
+	return this->m_rockOrbitalDistanceVariance;
+}
+
+qreal Values::rockHeightVariance() const
+{
+	return this->m_rockHeightVariance;
+}
+
+qreal Values::rockColorVariance() const
+{
+	return this->m_rockColorVariance;
+}
+
 
 }

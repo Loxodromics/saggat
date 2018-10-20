@@ -13,12 +13,17 @@ Entity {
     property real ringAngle: 10
     property real ringAxis: 0.3
     property color color: Qt.hsla( Math.random(), 0.8, 0.6, 1.0 )
+    property real rotationDuration: 10000
 
     property variant rockComponent: Qt.createComponent("Rock.qml");
     property var rocks: []
 
     QQ2.Component.onCompleted: {
         generate()
+    }
+
+    onRotationDurationChanged: {
+        ringTransform.duration = rotationDuration
     }
 
     Transform {
@@ -35,7 +40,7 @@ Entity {
     QQ2.NumberAnimation {
         target: ringTransform
         property: "rotationAngle"
-        duration: 5000 + Math.random() * 1000
+        duration: rotationDuration
         from: 0
         to: 360
 
@@ -52,11 +57,11 @@ Entity {
         for (var i = 0; i < numberOfRocks; i++) {
 
             var rockmodel = rockComponent.createObject(ring, {
-                "size": Math.random() * rockSize,
+                "size": Generator.rockSize(),
                 "orbitalDistance:": orbitalDistance + Math.random() * ringWidth, /// not working
                 "angle": Math.random() * 360,
-                "rockColor": color
-
+                "height": Generator.rockHeight(),
+                "rockColor": Qt.lighter(color, Generator.rockColor(0.5))
             });
 
             rockmodel.orbitalDistance = orbitalDistance + Math.random() * ringWidth
