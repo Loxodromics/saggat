@@ -6,5 +6,7 @@
         <file>qml/PlanetarySystem.qml</file>
         <file>qml/Rock.qml</file>
         <file>qml/Ring.qml</file>
+        <file>qml/Moons.qml</file>
+        <file>qml/Moon.qml</file>
     </qresource>
 </RCC>

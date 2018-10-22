@@ -25,26 +25,33 @@ public:
 		return instance;
 	}
 
-	Q_INVOKABLE qreal planetRadius();
-	Q_INVOKABLE int planetRotationDuration();
+	/// Planet
+	Q_INVOKABLE qreal	planetRadius();
+	Q_INVOKABLE int		planetRotationDuration();
 
-	Q_INVOKABLE qreal ringWidth();
-	Q_INVOKABLE qreal ringOrbitalDistance(qreal offset);
-	Q_INVOKABLE int ringNumberOfRocks(qreal ringWidth, qreal orbitalDistance);
-	Q_INVOKABLE qreal ringAxis();
-	Q_INVOKABLE qreal ringAngle();
-	Q_INVOKABLE QColor ringColor();
-	Q_INVOKABLE qreal ringRotationDuration();
+	/// Rings
+	Q_INVOKABLE qreal	ringWidth();
+	Q_INVOKABLE qreal	ringOrbitalDistance(qreal offset);
+	Q_INVOKABLE int		ringNumberOfRocks(qreal ringWidth, qreal orbitalDistance);
+	Q_INVOKABLE qreal	ringAxis();
+	Q_INVOKABLE qreal	ringAngle();
+	Q_INVOKABLE QColor	ringColor();
+	Q_INVOKABLE qreal	ringRotationDuration();
 
-	Q_INVOKABLE qreal rockSize();
-	Q_INVOKABLE qreal rockHeight();
-	Q_INVOKABLE qreal rockColor(qreal base);
-	Q_INVOKABLE qreal rockOrbitalDistance(qreal base);
+	/// Rocks
+	Q_INVOKABLE qreal	rockSize();
+	Q_INVOKABLE qreal	rockHeight();
+	Q_INVOKABLE qreal	rockColor(qreal base);
+	Q_INVOKABLE qreal	rockOrbitalDistance(qreal base);
+
+	/// Moons
+	Q_INVOKABLE int		moonCount(qreal planetSize);
+	Q_INVOKABLE qreal	moonSize(qreal planetSize);
+	Q_INVOKABLE qreal	moonOrbitalDistance(qreal planetSize, qreal moonSize);
+	Q_INVOKABLE	qreal	moonRotationDuration(qreal moonSize, qreal moonOrbitalDisance);
 
 protected:
-//	std::random_device m_randomDevice;
 	std::mt19937 m_gen;
-//	std::normal_distribution<> m_normalDistribution;
 
 private:
 	explicit Generator(QObject *parent = nullptr);

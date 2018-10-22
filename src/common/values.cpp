@@ -28,7 +28,12 @@ Values::Values(QObject *parent)
 	  m_rockSizeVariance(0.15),
 	  m_rockOrbitalDistanceVariance(2.5),
 	  m_rockHeightVariance(0.25),
-	  m_rockColorVariance(0.1)
+	  m_rockColorVariance(0.1),
+	  m_moonCountVariance(2.0),
+	  m_moonBaseSizeFactor(0.1),
+	  m_moonSizeVariance(2.0),
+	  m_moonOrbitalDistanceVariance(4.0),
+	  m_moonCountToPlanetSizeFactor(0.3)
 {
 
 }
@@ -196,6 +201,55 @@ void Values::setRingRotationTimeVariance(qreal ringRotationTimeVariance)
 	emit ringRotationTimeVarianceChanged(this->m_ringRotationTimeVariance);
 }
 
+void Values::setMoonCountVariance(qreal moonCountVariance)
+{
+	if (this->m_moonCountVariance == moonCountVariance)
+		return;
+
+	this->m_moonCountVariance = moonCountVariance;
+	emit moonCountVarianceChanged(this->m_moonCountVariance);
+}
+
+void Values::setMoonBaseSizeFactor(qreal moonBaseSizeFactor)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_moonBaseSizeFactor, moonBaseSizeFactor))
+		return;
+
+	this->m_moonBaseSizeFactor = moonBaseSizeFactor;
+	emit moonBaseSizeFactorChanged(this->m_moonBaseSizeFactor);
+}
+
+void Values::setMoonSizeVariance(qreal moonSizeVariance)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_moonSizeVariance, moonSizeVariance))
+		return;
+
+	this->m_moonSizeVariance = moonSizeVariance;
+	emit moonSizeVarianceChanged(this->m_moonSizeVariance);
+}
+
+void Values::setMoonOrbitalDistanceVariance(qreal moonOrbitalDistanceVariance)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_moonOrbitalDistanceVariance, moonOrbitalDistanceVariance))
+		return;
+
+	this->m_moonOrbitalDistanceVariance = moonOrbitalDistanceVariance;
+	emit moonOrbitalDistanceVarianceChanged(this->m_moonOrbitalDistanceVariance);
+}
+
+void Values::setMoonCountToPlanetSizeFactor(qreal moonCountToPlanetSizeFactor)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(m_moonCountToPlanetSizeFactor, moonCountToPlanetSizeFactor))
+		return;
+
+	m_moonCountToPlanetSizeFactor = moonCountToPlanetSizeFactor;
+	emit moonCountToPlanetSizeFactorChanged(m_moonCountToPlanetSizeFactor);
+}
+
 void Values::setRingBaseColor(QColor ringBaseColor)
 {
 	if (this->m_ringBaseColor == ringBaseColor)
@@ -298,6 +352,31 @@ qreal Values::rockHeightVariance() const
 qreal Values::rockColorVariance() const
 {
 	return this->m_rockColorVariance;
+}
+
+qreal Values::moonCountVariance() const
+{
+	return this->m_moonCountVariance;
+}
+
+qreal Values::moonBaseSizeFactor() const
+{
+	return this->m_moonBaseSizeFactor;
+}
+
+qreal Values::moonSizeVariance() const
+{
+	return this->m_moonSizeVariance;
+}
+
+qreal Values::moonOrbitalDistanceVariance() const
+{
+	return this->m_moonOrbitalDistanceVariance;
+}
+
+qreal Values::moonCountToPlanetSizeFactor() const
+{
+	return m_moonCountToPlanetSizeFactor;
 }
 
 

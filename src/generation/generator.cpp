@@ -108,4 +108,32 @@ qreal Generator::rockOrbitalDistance(qreal base)
 	return dist(this->m_gen);
 }
 
+int Generator::moonCount(qreal planetSize)
+{
+	std::normal_distribution<> dist{planetSize * Values::getInstance().moonCountToPlanetSizeFactor(),
+									Values::getInstance().moonCountVariance()};
+	return int(std::floor(qMax(dist(this->m_gen), 0.0)) * 5);
+}
+
+qreal Generator::moonSize(qreal planetSize)
+{
+	std::normal_distribution<> dist{planetSize * Values::getInstance().moonBaseSizeFactor(),
+				Values::getInstance().moonSizeVariance()};
+//	return planetSize * Values::getInstance().moonBaseSizeFactor();
+	return dist(this->m_gen);
+}
+
+qreal Generator::moonOrbitalDistance(qreal planetSize, qreal moonSize)
+{
+	std::normal_distribution<> dist{planetSize * 3.0 + moonSize * 3.0,
+				Values::getInstance().moonOrbitalDistanceVariance()};
+//	return planetSize + 2 * moonSize;
+	return qMax(dist(this->m_gen), planetSize + 2 * moonSize);
+}
+
+qreal Generator::moonRotationDuration(qreal moonSize, qreal moonOrbitalDisance)
+{
+	return 0.0;//TODO
+}
+
 } // namespace Saggat

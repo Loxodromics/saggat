@@ -3,5 +3,6 @@
         <file>textures/sky.png</file>
         <file>textures/planet.jpg</file>
         <file>textures/rock.jpg</file>
+        <file>textures/moon.jpg</file>
     </qresource>
 </RCC>

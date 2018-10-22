@@ -22,6 +22,10 @@ Entity {
         id: ring2
     }
 
+    Moons {
+        id: moons
+    }
+
     Transform {
         id: sizeTransform
         property real size: 0.0
@@ -55,7 +59,7 @@ Entity {
         console.log("planet.radius: " + planet.radius + " planet.rotationDuration: " + planet.rotationDuration)
         planet.generate()
 
-        if ( 0.25 < Math.random() ) {
+        if ( 10.25 < Math.random() ) {
             /// random chance to have a first ring
             ring.ringWidth = Generator.ringWidth()
             ring.orbitalDistance = Generator.ringOrbitalDistance(planet.radius)
@@ -70,7 +74,7 @@ Entity {
         }
         ring.generate()
 
-        if ( 0.25 > Math.random() ) {
+        if ( 0.000025 > Math.random() ) {
             /// random chance to have a second ring
             ring2.ringWidth = Generator.ringWidth()
             ring2.orbitalDistance = Generator.ringOrbitalDistance(planet.radius)
@@ -86,5 +90,8 @@ Entity {
         ring2.generate()
 
         sizeAnimation.restart()
+
+        moons.planetSize = planet.radius
+        moons.generate()
     }
 }
