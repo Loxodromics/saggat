@@ -31,7 +31,7 @@ Values::Values(QObject *parent)
 	  m_rockColorVariance(0.1),
 	  m_moonCountVariance(2.0),
 	  m_moonBaseSizeFactor(0.1),
-	  m_moonSizeVariance(2.0),
+	  m_moonSizeVariance(1.0),
 	  m_moonOrbitalDistanceVariance(4.0),
 	  m_moonCountToPlanetSizeFactor(0.3)
 {

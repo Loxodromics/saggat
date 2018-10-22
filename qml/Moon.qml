@@ -15,8 +15,10 @@ Entity {
     property real rotationTarget: 360
 
     onRotationDurationChanged: {
+        console.log("sphereTransformAnimation.duration: " + sphereTransformAnimation.duration + " rotationDuration: " + rotationDuration)
         sphereTransformAnimation.duration = rotationDuration
         sphereTransformAnimation.restart()
+        console.log("sphereTransformAnimation.duration: " + sphereTransformAnimation.duration)
     }
 
     onRotationTargetChanged: {
@@ -72,6 +74,11 @@ Entity {
 
         loops: QQ2.Animation.Infinite
         running: true
+
+        onDurationChanged: {
+            console.log("duration: " + duration)
+            restart()
+        }
     }
 
     Entity {

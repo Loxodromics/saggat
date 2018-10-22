@@ -23,10 +23,13 @@ Entity {
             var moommodel = moonComponent.createObject(ring, {
                 "radius": Generator.moonSize(planetSize),
                 "orbitalDistance:": 1234, /// not working
-                "angleOffset": Math.random() * 360
+                "angleOffset": Math.random() * 360,
+
             });
 
             moommodel.orbitalDistance = Generator.moonOrbitalDistance(planetSize, moommodel.radius)
+            moommodel.rotationDuration =  Generator.moonRotationDuration(planetSize, moommodel.radius, moommodel.orbitalDistance)
+//            console.log("time: " + Generator.moonRotationDuration(planetSize, moommodel.radius, moommodel.orbitalDistance))
 
             moons.push(moommodel)
         }

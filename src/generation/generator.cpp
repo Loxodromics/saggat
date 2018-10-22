@@ -131,9 +131,10 @@ qreal Generator::moonOrbitalDistance(qreal planetSize, qreal moonSize)
 	return qMax(dist(this->m_gen), planetSize + 2 * moonSize);
 }
 
-qreal Generator::moonRotationDuration(qreal moonSize, qreal moonOrbitalDisance)
+qreal Generator::moonRotationDuration(qreal planetSize, qreal moonSize, qreal moonOrbitalDisance)
 {
-	return 0.0;//TODO
+	qreal factor = 10.0;
+	return (std::sqrt((factor * planetSize) / moonOrbitalDisance) * 40000)/moonSize;
 }
 
 } // namespace Saggat
