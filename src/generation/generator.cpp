@@ -8,6 +8,7 @@
 #include "generator.h"
 #include "src/common/values.h"
 #include <cmath>
+#include <QDebug>
 
 namespace Saggat {
 
@@ -120,7 +121,7 @@ qreal Generator::moonSize(qreal planetSize)
 	std::normal_distribution<> dist{planetSize * Values::getInstance().moonBaseSizeFactor(),
 				Values::getInstance().moonSizeVariance()};
 //	return planetSize * Values::getInstance().moonBaseSizeFactor();
-	return dist(this->m_gen);
+	return qAbs(dist(this->m_gen));
 }
 
 qreal Generator::moonOrbitalDistance(qreal planetSize, qreal moonSize)
@@ -131,10 +132,12 @@ qreal Generator::moonOrbitalDistance(qreal planetSize, qreal moonSize)
 	return qMax(dist(this->m_gen), planetSize + 2 * moonSize);
 }
 
-qreal Generator::moonRotationDuration(qreal planetSize, qreal moonSize, qreal moonOrbitalDisance)
+int Generator::moonRotationDuration(qreal planetSize, qreal moonSize, qreal moonOrbitalDisance)
 {
 	qreal factor = 10.0;
-	return (std::sqrt((factor * planetSize) / moonOrbitalDisance) * 40000)/moonSize;
+//	qDebug() << "planetSize:" << planetSize << "moonOrbitalDisance:" << moonOrbitalDisance << "moonSize:" << moonSize <<
+//				"return: " << 100 * int(std::floor(((std::sqrt((factor * planetSize) / moonOrbitalDisance) * 10000)/moonSize)));
+	return 10 * int(std::floor(((std::sqrt((factor * planetSize) / moonOrbitalDisance) * 10000)/moonSize)));
 }
 
 } // namespace Saggat

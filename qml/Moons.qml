@@ -20,18 +20,16 @@ Entity {
 
         for (var i = 0; i < numberOfMoons; i++) {
 
-            var moommodel = moonComponent.createObject(ring, {
+            var moonModel = moonComponent.createObject(root, {
                 "radius": Generator.moonSize(planetSize),
-                "orbitalDistance:": 1234, /// not working
-                "angleOffset": Math.random() * 360,
-
+                "angleOffset": Math.random() * 360
             });
 
-            moommodel.orbitalDistance = Generator.moonOrbitalDistance(planetSize, moommodel.radius)
-            moommodel.rotationDuration =  Generator.moonRotationDuration(planetSize, moommodel.radius, moommodel.orbitalDistance)
-//            console.log("time: " + Generator.moonRotationDuration(planetSize, moommodel.radius, moommodel.orbitalDistance))
+            moonModel.orbitalDistance = Generator.moonOrbitalDistance(planetSize, moonModel.radius)
+            moonModel.rotationDuration =  Generator.moonRotationDuration(planetSize, moonModel.radius, moonModel.orbitalDistance)
+//            console.log("time: " + Generator.moonRotationDuration(planetSize, moonModel.radius, moonModel.orbitalDistance))
 
-            moons.push(moommodel)
+            moons.push(moonModel)
         }
     }
 

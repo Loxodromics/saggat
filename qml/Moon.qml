@@ -8,23 +8,11 @@ Entity {
     id: root
 
     property real radius: 5
-    property real rotationDuration: 30000
+    property alias rotationDuration: moonTransformAnimation.duration
     property real orbitalDistance: 15
     property real angleOffset: 0
     property vector3d upVector: Qt.vector3d(0, 1, 0)
     property real rotationTarget: 360
-
-    onRotationDurationChanged: {
-        console.log("sphereTransformAnimation.duration: " + sphereTransformAnimation.duration + " rotationDuration: " + rotationDuration)
-        sphereTransformAnimation.duration = rotationDuration
-        sphereTransformAnimation.restart()
-        console.log("sphereTransformAnimation.duration: " + sphereTransformAnimation.duration)
-    }
-
-    onRotationTargetChanged: {
-        sphereTransformAnimation.to = rotationTarget
-        sphereTransformAnimation.restart()
-    }
 
     TextureMaterial {
         id: moonMaterial
@@ -47,14 +35,14 @@ Entity {
     }
 
     SphereMesh {
-        id: sphereMesh
+        id: moonMesh
 
         generateTangents: true
         radius: root.radius
     }
 
     Transform {
-        id: sphereTransform
+        id: moonTransform
         property real userAngle: 0.0
         matrix: {
             var m = Qt.matrix4x4();
@@ -65,25 +53,20 @@ Entity {
     }
 
     QQ2.NumberAnimation {
-        id: sphereTransformAnimation
-        target: sphereTransform
+        id: moonTransformAnimation
+        target: moonTransform
         property: "userAngle"
-        duration: rotationDuration
+        duration: 50000
         from: 0
-        to: rotationTarget
+        to: 360
 
         loops: QQ2.Animation.Infinite
         running: true
-
-        onDurationChanged: {
-            console.log("duration: " + duration)
-            restart()
-        }
     }
 
     Entity {
-        id: sphereEntity
-        components: [ sphereMesh, moonMaterial, sphereTransform ]
+        id: moonEntity
+        components: [ moonMesh, moonMaterial, moonTransform ]
     }
 
 }
