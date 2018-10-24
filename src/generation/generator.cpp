@@ -62,7 +62,7 @@ qreal Generator::ringAxis()
 
 qreal Generator::ringAngle()
 {
-	std::normal_distribution<> dist{0, 10};
+	std::normal_distribution<> dist{0, Values::getInstance().ringAngleVariance()};
 	return qMax(qMin(dist(this->m_gen), 90.0), -90.0);
 }
 
@@ -138,6 +138,18 @@ int Generator::moonRotationDuration(qreal planetSize, qreal moonSize, qreal moon
 //	qDebug() << "planetSize:" << planetSize << "moonOrbitalDisance:" << moonOrbitalDisance << "moonSize:" << moonSize <<
 //				"return: " << 100 * int(std::floor(((std::sqrt((factor * planetSize) / moonOrbitalDisance) * 10000)/moonSize)));
 	return 10 * int(std::floor(((std::sqrt((factor * planetSize) / moonOrbitalDisance) * 10000)/moonSize)));
+}
+
+qreal Generator::moonAxis()
+{
+	std::uniform_real_distribution<> dist{0.0, 1.0};
+	return qMax(qMin(dist(this->m_gen), 1.0), 0.0);
+}
+
+qreal Generator::moonAngle()
+{
+	std::normal_distribution<> dist{0, Values::getInstance().moonAngleVariance()};
+	return qMax(qMin(dist(this->m_gen), 90.0), -90.0);
 }
 
 } // namespace Saggat

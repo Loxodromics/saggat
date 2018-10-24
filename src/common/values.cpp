@@ -24,6 +24,7 @@ Values::Values(QObject *parent)
 	  m_ringBaseColor(QColor()),
 	  m_ringBaseRotationTime(8000),
 	  m_ringRotationTimeVariance(2000),
+	  m_ringAngleVariance(10.0),
 	  m_rockBaseSize(0.5),
 	  m_rockSizeVariance(0.15),
 	  m_rockOrbitalDistanceVariance(2.5),
@@ -33,7 +34,8 @@ Values::Values(QObject *parent)
 	  m_moonBaseSizeFactor(0.1),
 	  m_moonSizeVariance(1.0),
 	  m_moonOrbitalDistanceVariance(4.0),
-	  m_moonCountToPlanetSizeFactor(0.3)
+	  m_moonCountToPlanetSizeFactor(0.3),
+	  m_moonAngleVariance(10.0)
 {
 
 }
@@ -250,6 +252,26 @@ void Values::setMoonCountToPlanetSizeFactor(qreal moonCountToPlanetSizeFactor)
 	emit moonCountToPlanetSizeFactorChanged(m_moonCountToPlanetSizeFactor);
 }
 
+void Values::setMoonAngleVariance(qreal moonAngleVariance)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_moonAngleVariance, moonAngleVariance))
+		return;
+
+	this->m_moonAngleVariance = moonAngleVariance;
+	emit moonAngleVarianceChanged(this->m_moonAngleVariance);
+}
+
+void Values::setRingAngleVariance(qreal ringAngleVariance)
+{
+	qWarning("Floating point comparison needs context sanity check");
+	if (qFuzzyCompare(this->m_ringAngleVariance, ringAngleVariance))
+		return;
+
+	this->m_ringAngleVariance = ringAngleVariance;
+	emit ringAngleVarianceChanged(this->m_ringAngleVariance);
+}
+
 void Values::setRingBaseColor(QColor ringBaseColor)
 {
 	if (this->m_ringBaseColor == ringBaseColor)
@@ -376,7 +398,17 @@ qreal Values::moonOrbitalDistanceVariance() const
 
 qreal Values::moonCountToPlanetSizeFactor() const
 {
-	return m_moonCountToPlanetSizeFactor;
+	return this->m_moonCountToPlanetSizeFactor;
+}
+
+qreal Values::moonAngleVariance() const
+{
+	return this->m_moonAngleVariance;
+}
+
+qreal Values::ringAngleVariance() const
+{
+	return this->m_ringAngleVariance;
 }
 
 

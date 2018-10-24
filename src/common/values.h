@@ -39,6 +39,7 @@ public:
 	Q_PROPERTY(QColor ringBaseColor READ ringBaseColor WRITE setRingBaseColor NOTIFY ringBaseColorChanged)
 	Q_PROPERTY(qreal ringBaseRotationTime READ ringBaseRotationTime WRITE setRingBaseRotationTime NOTIFY ringBaseRotationTimeChanged)
 	Q_PROPERTY(qreal ringRotationTimeVariance READ ringRotationTimeVariance WRITE setRingRotationTimeVariance NOTIFY ringRotationTimeVarianceChanged)
+	Q_PROPERTY(qreal ringAngleVariance READ ringAngleVariance WRITE setRingAngleVariance NOTIFY ringAngleVarianceChanged)
 
 	/// Rocks
 	Q_PROPERTY(qreal rockBaseSize READ rockBaseSize WRITE setRockBaseSize NOTIFY rockBaseSizeChanged)
@@ -53,6 +54,7 @@ public:
 	Q_PROPERTY(qreal moonSizeVariance READ moonSizeVariance WRITE setMoonSizeVariance NOTIFY moonSizeVarianceChanged)
 	Q_PROPERTY(qreal moonOrbitalDistanceVariance READ moonOrbitalDistanceVariance WRITE setMoonOrbitalDistanceVariance NOTIFY moonOrbitalDistanceVarianceChanged)
 	Q_PROPERTY(qreal moonCountToPlanetSizeFactor READ moonCountToPlanetSizeFactor WRITE setMoonCountToPlanetSizeFactor NOTIFY moonCountToPlanetSizeFactorChanged)
+	Q_PROPERTY(qreal moonAngleVariance READ moonAngleVariance WRITE setMoonAngleVariance NOTIFY moonAngleVarianceChanged)
 
 	qreal planetBaseRadius() const;
 	qreal planetRadiusVariance() const;
@@ -67,6 +69,7 @@ public:
 	QColor ringBaseColor() const;
 	qreal ringBaseRotationTime() const;
 	qreal ringRotationTimeVariance() const;
+	qreal ringAngleVariance() const;
 	qreal rockBaseSize() const;
 	qreal rockSizeVariance() const;
 	qreal rockOrbitalDistanceVariance() const;
@@ -77,6 +80,8 @@ public:
 	qreal moonSizeVariance() const;
 	qreal moonOrbitalDistanceVariance() const;
 	qreal moonCountToPlanetSizeFactor() const;
+	qreal moonAngleVariance() const;
+
 
 public slots:
 	void setPlanetBaseRadius(qreal planetBaseRadius);
@@ -90,6 +95,7 @@ public slots:
 	void setRingOrbitalDistanceVariance(qreal ringOrbitalDistanceVariance);
 	void setRingDensityFactor(qreal ringDensityFactor);
 	void setRingBaseColor(QColor ringBaseColor);
+	void setRingAngleVariance(qreal ringAngleVariance);
 	void setRockBaseSize(qreal rockBaseSize);
 	void setRockSizeVariance(qreal rockSizeVariance);
 	void setRockOrbitalDistanceVariance(qreal rockOrbitalDistanceVariance);
@@ -102,6 +108,7 @@ public slots:
 	void setMoonSizeVariance(qreal moonSizeVariance);
 	void setMoonOrbitalDistanceVariance(qreal moonOrbitalDistanceVariance);
 	void setMoonCountToPlanetSizeFactor(qreal moonCountToPlanetSizeFactor);
+	void setMoonAngleVariance(qreal moonAngleVariance);
 
 signals:
 	void planetBaseRadiusChanged(qreal planetBaseRadius);
@@ -115,18 +122,20 @@ signals:
 	void ringOrbitalDistanceVarianceChanged(qreal ringOrbitalDistanceVariance);
 	void ringDensityFactorChanged(qreal ringDensityFactor);
 	void ringBaseColorChanged(QColor ringBaseColor);
+	void ringBaseRotationTimeChanged(qreal ringBaseRotationTime);
+	void ringRotationTimeVarianceChanged(qreal ringRotationTimeVariance);
+	void ringAngleVarianceChanged(qreal ringAngleVariance);
 	void rockBaseSizeChanged(qreal rockBaseSize);
 	void rockSizeVarianceChanged(qreal rockSizeVariance);
 	void rockOrbitalDistanceVarianceChanged(qreal rockOrbitalDistanceVariance);
 	void rockHeightVarianceChanged(qreal rockHeightVariance);
 	void rockColorVarianceChanged(qreal rockColorVariance);
-	void ringBaseRotationTimeChanged(qreal ringBaseRotationTime);
-	void ringRotationTimeVarianceChanged(qreal ringRotationTimeVariance);
 	void moonCountVarianceChanged(qreal moonCountVariance);
 	void moonBaseSizeFactorChanged(qreal moonBaseSizeFactor);
 	void moonSizeVarianceChanged(qreal moonSizeVariance);
 	void moonOrbitalDistanceVarianceChanged(qreal moonOrbitalDistanceVariance);
 	void moonCountToPlanetSizeFactorChanged(qreal moonCountToPlanetSizeFactor);
+	void moonAngleVarianceChanged(qreal moonAngleVariance);
 
 protected:
 	qreal m_planetBaseRadius;
@@ -142,6 +151,7 @@ protected:
 	QColor m_ringBaseColor;
 	qreal m_ringBaseRotationTime;
 	qreal m_ringRotationTimeVariance;
+	qreal m_ringAngleVariance;
 	qreal m_rockBaseSize;
 	qreal m_rockSizeVariance;
 	qreal m_rockOrbitalDistanceVariance;
@@ -152,6 +162,7 @@ protected:
 	qreal m_moonSizeVariance;
 	qreal m_moonOrbitalDistanceVariance;
 	qreal m_moonCountToPlanetSizeFactor;
+	qreal m_moonAngleVariance;
 
 private:
 	explicit Values(QObject *parent = nullptr);

@@ -18,10 +18,6 @@ Entity {
     property variant rockComponent: Qt.createComponent("Rock.qml");
     property var rocks: []
 
-    QQ2.Component.onCompleted: {
-        generate()
-    }
-
     onRotationDurationChanged: {
         ringTransform.duration = rotationDuration
     }

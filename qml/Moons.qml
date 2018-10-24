@@ -22,11 +22,14 @@ Entity {
 
             var moonModel = moonComponent.createObject(root, {
                 "radius": Generator.moonSize(planetSize),
-                "angleOffset": Math.random() * 360
+                "angleOffset": Math.random() * 360,
+                "moonAngle": Generator.moonAxis(),
+                "moonAxis":  Generator.moonAngle()
             });
 
             moonModel.orbitalDistance = Generator.moonOrbitalDistance(planetSize, moonModel.radius)
             moonModel.rotationDuration =  Generator.moonRotationDuration(planetSize, moonModel.radius, moonModel.orbitalDistance)
+            moonModel.moonAngle = Generator.moonAngle();
 //            console.log("time: " + Generator.moonRotationDuration(planetSize, moonModel.radius, moonModel.orbitalDistance))
 
             moons.push(moonModel)

@@ -48,7 +48,9 @@ public:
 	Q_INVOKABLE int		moonCount(qreal planetSize);
 	Q_INVOKABLE qreal	moonSize(qreal planetSize);
 	Q_INVOKABLE qreal	moonOrbitalDistance(qreal planetSize, qreal moonSize);
-	Q_INVOKABLE	int moonRotationDuration(qreal planetSize, qreal moonSize, qreal moonOrbitalDisance);
+	Q_INVOKABLE	int		moonRotationDuration(qreal planetSize, qreal moonSize, qreal moonOrbitalDisance);
+	Q_INVOKABLE qreal	moonAxis();
+	Q_INVOKABLE qreal	moonAngle();
 
 protected:
 	std::mt19937 m_gen;

@@ -11,6 +11,8 @@ Entity {
     property alias rotationDuration: moonTransformAnimation.duration
     property real orbitalDistance: 15
     property real angleOffset: 0
+    property real moonAngle: 10
+    property real moonAxis: 0.3
     property vector3d upVector: Qt.vector3d(0, 1, 0)
     property real rotationTarget: 360
 
@@ -46,6 +48,7 @@ Entity {
         property real userAngle: 0.0
         matrix: {
             var m = Qt.matrix4x4();
+            m.rotate(moonAngle, Qt.vector3d(moonAxis, 0, 1.0 - moonAxis));
             m.rotate(userAngle + angleOffset, upVector)
             m.translate(Qt.vector3d(orbitalDistance, 0, 0));
             return m;

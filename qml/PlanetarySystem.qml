@@ -6,6 +6,10 @@ import QtQuick 2.0 as QQ2
 Entity {
     id: root
 
+    QQ2.Component.onCompleted: {
+        generate()
+    }
+
     Planet {
         id: planet
 
