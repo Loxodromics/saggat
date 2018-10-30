@@ -18,7 +18,8 @@ SOURCES += \
         src/generation/generator.cpp
 
 RESOURCES += qml.qrc \
-    ../saggat/resource/textures.qrc
+    ../saggat/resource/textures.qrc \
+    ../saggat/resource/shader.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

@@ -22,24 +22,9 @@ Entity {
         sphereTransformAnimation.restart()
     }
 
-    TextureMaterial {
+    PlanetSurfaceMaterial {
         id: planetMaterial
-
-        texture: Texture2D {
-            id: planetTexture
-            minificationFilter: Texture.LinearMipMapLinear
-            magnificationFilter: Texture.Linear
-            wrapMode {
-                x: WrapMode.Repeat
-                y: WrapMode.Repeat
-            }
-            generateMipMaps: true
-            maximumAnisotropy: 16.0
-            TextureImage {
-                id: planetTextureImage
-                source: "qrc:/textures/planet.jpg"
-            }
-        }
+        diameter: radius
     }
 
     SphereMesh {
@@ -47,6 +32,8 @@ Entity {
 
         generateTangents: true
         radius: root.radius
+        slices: 75
+        rings: 75
     }
 
     Transform {

@@ -8,13 +8,18 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QSurface>
 #include "src/common/values.h"
 #include "src/generation/generator.h"
 
 int main(int argc, char *argv[])
 {
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
+	QSurfaceFormat defaultFormat;
+	defaultFormat.setProfile(QSurfaceFormat::CoreProfile);
+	defaultFormat.setVersion(3, 2);
+	defaultFormat.setSwapBehavior(QSurfaceFormat::DoubleBuffer);
+	QSurfaceFormat::setDefaultFormat(defaultFormat);
 	QGuiApplication app(argc, argv);
 
 	QQmlApplicationEngine engine;

@@ -8,5 +8,6 @@
         <file>qml/Ring.qml</file>
         <file>qml/Moons.qml</file>
         <file>qml/Moon.qml</file>
+        <file>qml/PlanetSurfaceMaterial.qml</file>
     </qresource>
 </RCC>

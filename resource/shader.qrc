@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/es2/planetSurfaceShader.frag</file>
+        <file>shaders/es2/planetSurfaceShader.vert</file>
+        <file>shaders/es3/planetSurfaceShader.frag</file>
+        <file>shaders/es3/planetSurfaceShader.vert</file>
+        <file>shaders/gl3/planetSurfaceShader.frag</file>
+        <file>shaders/gl3/planetSurfaceShader.vert</file>
+    </qresource>
+</RCC>
