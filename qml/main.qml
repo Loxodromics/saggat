@@ -43,7 +43,21 @@ Window {
         }
     }
 
+    MouseArea {
+        id: sliderHider
+
+        hoverEnabled: true
+
+        anchors.top: sliderLayout.top
+        anchors.bottom: sliderLayout.bottom
+        anchors.left: sliderLayout.left
+        anchors.right: sliderLayout.right
+    }
+
     ColumnLayout {
+        id: sliderLayout
+
+        visible: sliderHider.containsMouse
 
         Slider {
             id: seedSlider
