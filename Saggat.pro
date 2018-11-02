@@ -1,4 +1,7 @@
-QT += quick
+QT += qml quick \
+    concurrent \
+    3dcore 3drender 3dinput \
+    3dquick 3dquickrender 3dquickinput 3dquickextras
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -15,7 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         src/common/values.cpp \
-        src/generation/generator.cpp
+        src/generation/generator.cpp \
+        src/graphics/planetsurfacematerial.cpp
 
 RESOURCES += qml.qrc \
     ../saggat/resource/textures.qrc \
@@ -34,4 +38,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
         src/common/values.h \
-        src/generation/generator.h
+        src/generation/generator.h \
+        src/graphics/planetsurfacematerial.h

@@ -26,7 +26,7 @@ void main()
 	worldTangent.w = vertexTangent.w;
 
 	// Calculate vertex position in clip coordinates
-	gl_Position = modelViewProjection * vec4(worldPosition, 1.0);
-	fragPos = vec3(modelMatrix * vec4(vertexPosition, 1.0));
+	gl_Position = modelViewProjection * vec4(vertexPosition, 1.0);
+	fragPos = vertexPosition; //vec3(modelMatrix * vec4(vertexPosition, 1.0));
 }
 

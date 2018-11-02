@@ -11,6 +11,7 @@
 #include <QSurface>
 #include "src/common/values.h"
 #include "src/generation/generator.h"
+#include "src/graphics/planetsurfacematerial.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,6 +21,9 @@ int main(int argc, char *argv[])
 	defaultFormat.setVersion(3, 2);
 	defaultFormat.setSwapBehavior(QSurfaceFormat::DoubleBuffer);
 	QSurfaceFormat::setDefaultFormat(defaultFormat);
+
+	qmlRegisterType<Saggat::PlanetSurfaceMaterial>("Saggat", 1, 0, "PlanetSurfaceMaterial");
+
 	QGuiApplication app(argc, argv);
 
 	QQmlApplicationEngine engine;

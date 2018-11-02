@@ -23,8 +23,8 @@ Entity {
         planetTransformAnimation.restart()
     }
 
-    PlanetSurfaceMaterial {
-        id: planetMaterial__
+    PlanetSurfaceMaterialQml {
+        id: planetMaterial
         diameter: radius
         sun: sun
     }
@@ -38,7 +38,7 @@ Entity {
     }
 
     PerVertexColorMaterial {
-        id: planetMaterial
+        id: planetMaterial__
 //        parameters: [
 //            Parameter {
 //                name: "maincolor"
