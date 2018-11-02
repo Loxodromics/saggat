@@ -12,13 +12,13 @@ Entity {
     property real angle: 20
     property real height: 0
     property color rockColor: Qt.hsla( Math.random(), 0.8, 0.6, 1.0)
-
+    property Sun sun
 
     PhongMaterial {
         id: rockMaterial
         ambient: Qt.rgba( 0.2, 0.2, 0.2, 1.0 )
         diffuse: rockColor
-        specular: Qt.rgba( 0.9, 0.9, 0.9, 1.0 )
+        specular: Qt.rgba( 0.1, 0.1, 0.1, 1.0 )
         shininess: 0.9
     }
 

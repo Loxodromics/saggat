@@ -15,6 +15,7 @@ Entity {
     property real moonAxis: 0.3
     property vector3d upVector: Qt.vector3d(0, 1, 0)
     property real rotationTarget: 360
+    property Sun sun
 
     TextureMaterial {
         id: moonMaterial

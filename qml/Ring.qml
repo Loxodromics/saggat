@@ -14,6 +14,7 @@ Entity {
     property real ringAxis: 0.3
     property color color: Qt.hsla( Math.random(), 0.8, 0.6, 1.0 )
     property real rotationDuration: 10000
+    property Sun sun
 
     property variant rockComponent: Qt.createComponent("Rock.qml");
     property var rocks: []
@@ -57,7 +58,8 @@ Entity {
                 "orbitalDistance:": 1234, /// not working
                 "angle": Math.random() * 360,
                 "height": Generator.rockHeight(),
-                "rockColor": Qt.lighter(color, Generator.rockColor(0.5))
+                "rockColor": Qt.lighter(color, Generator.rockColor(0.5)),
+                "sun": sun
             });
 
             rockmodel.orbitalDistance = Generator.rockOrbitalDistance(orbitalDistance)

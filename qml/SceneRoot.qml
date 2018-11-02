@@ -29,8 +29,27 @@ Entity {
         InputSettings { }
     ]
 
+    Entity {
+        DirectionalLight {
+            id: directional
+            worldDirection: Qt.vector3d(-0.3, -0.1, -0.5).normalized();
+            color: "#fff2a3"
+            intensity: 0.79
+        }
+        Transform {
+            id: lightpostransform
+            translation: Qt.vector3d(4000.0, 1000.0, 6000.0)
+        }
+        components: [lightpostransform, directional]
+    }
+
     PlanetarySystem {
         id: planetarySystem
+        sun: sun
+    }
+
+    Sun {
+        id: sun
     }
 
     function generate() {

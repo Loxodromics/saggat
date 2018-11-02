@@ -11,6 +11,7 @@ Entity {
 
     property var moons: []
     property variant moonComponent: Qt.createComponent("Moon.qml");
+    property Sun sun
 
 
     function generate() {
@@ -24,7 +25,8 @@ Entity {
                 "radius": Generator.moonSize(planetSize),
                 "angleOffset": Math.random() * 360,
                 "moonAngle": Generator.moonAxis(),
-                "moonAxis":  Generator.moonAngle()
+                "moonAxis":  Generator.moonAngle(),
+                "sun": sun
             });
 
             moonModel.orbitalDistance = Generator.moonOrbitalDistance(planetSize, moonModel.radius)

@@ -9,5 +9,6 @@
         <file>qml/Moons.qml</file>
         <file>qml/Moon.qml</file>
         <file>qml/PlanetSurfaceMaterial.qml</file>
+        <file>qml/Sun.qml</file>
     </qresource>
 </RCC>

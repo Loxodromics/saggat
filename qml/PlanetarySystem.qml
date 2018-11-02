@@ -6,6 +6,8 @@ import QtQuick 2.0 as QQ2
 Entity {
     id: root
 
+    property Sun sun
+
     QQ2.Component.onCompleted: {
         generate()
     }
@@ -16,18 +18,22 @@ Entity {
         radius: 9
         rotationDuration: 24000
         upVector: Qt.vector3d(0.0, 1.0, 0.0)
+        sun: sun
     }
 
     Ring {
         id: ring
+        sun: sun
     }
 
     Ring {
         id: ring2
+        sun: sun
     }
 
     Moons {
         id: moons
+        sun: sun
     }
 
     Transform {

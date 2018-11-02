@@ -2,6 +2,10 @@
 //precision mediump float;
 in vec4 vertexColor;
 in vec3 fragPos;
+in vec3 worldPosition;
+in vec3 worldNormal;
+in vec4 worldTangent;
+
 uniform float planetScale;
 uniform float heightScale;
 uniform float diameter;
@@ -11,9 +15,12 @@ uniform float e2;
 uniform float coldness;
 uniform float seed;
 uniform bool displayHeight;
+uniform vec3 eyePosition;
 
 out vec4 fragColor;
 
+#pragma include phong.inc.frag
+#pragma include coordinatesystems.inc
 
 //	Classic Perlin 3D Noise
 //	by Stefan Gustavson
@@ -91,18 +98,18 @@ float cnoise(vec3 P) {
 	return 2.2 * n_xyz;
 }
 
-vec3 terrainColor(float height) {
+vec4 terrainColor(float height) {
 	if (height < 0.1) {
-		return vec3(0.2, 0.286, 0.769);
+		return vec4(0.2, 0.286, 0.769, 0.8);
 	}
 	else if (height < 0.6) {
-		return vec3(0.286, 0.494, 0.141);
+		return vec4(0.286, 0.494, 0.141, 0.1);
 	}
 	else if (height < 0.75) {
-		return vec3(0.586, 0.594, 0.541);
+		return vec4(0.586, 0.594, 0.541, 0.1);
 	}
 	else {
-		return vec3(0.986, 0.994, 0.941);
+		return vec4(0.986, 0.994, 0.941, 0.1);
 	}
 }
 
@@ -114,12 +121,20 @@ void main() {
 	eSum *= heightScale;
 	float coldnessVariation = abs(fragPos.y / diameter) * abs(fragPos.y / diameter) * coldness;
 
+	vec4 outputColor = vec4(1.0, 0.0, 0.0, 1.0);
 	if (displayHeight) {
-		fragColor = vec4(eSum, eSum, eSum, 1.0);
+		outputColor = vec4(eSum, eSum, eSum, 1.0);
 	}
 	else {
-		fragColor = vec4(terrainColor(eSum + coldnessVariation), 1.0);
+		outputColor = vec4(terrainColor(eSum + coldnessVariation).xyz, 1.0);
 	}
 
-//	fragColor = vec4(val, val, val, 1.0);
+	vec3 tNormal = worldTangent.xyz;
+	mat3 tangentMatrix = calcWorldSpaceToTangentSpaceMatrix(worldNormal, worldTangent);
+	mat3 invertTangentMatrix = transpose(tangentMatrix);
+	vec3 wNormal = normalize(invertTangentMatrix * tNormal);
+	vec3 worldView = normalize(eyePosition - worldPosition);
+	outputColor = phongFunction(outputColor * 0.1, outputColor, vec4(outputColor.xyz, 1.0) * (1.0 + outputColor.w), 0.0, worldPosition, worldView, worldNormal);
+
+	fragColor = vec4(outputColor.xyz, 1.0);
 }

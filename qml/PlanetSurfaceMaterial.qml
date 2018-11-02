@@ -16,6 +16,7 @@ Material {
     property bool displayHeight: heightMapSwitch.position
 
     property color maincolor: Qt.rgba(0.0, 0.0, 0.0, 1.0)
+    property Sun sun
 
     parameters: [
         Parameter {

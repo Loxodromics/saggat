@@ -11,33 +11,53 @@ Entity {
     property real rotationDuration: 30000
     property vector3d upVector: Qt.vector3d(0, 1, 0)
     property real rotationTarget: 360
+    property Sun sun
 
     onRotationDurationChanged: {
-        sphereTransformAnimation.duration = rotationDuration
-        sphereTransformAnimation.restart()
+        planetTransformAnimation.duration = rotationDuration
+        planetTransformAnimation.restart()
     }
 
     onRotationTargetChanged: {
-        sphereTransformAnimation.to = rotationTarget
-        sphereTransformAnimation.restart()
+        planetTransformAnimation.to = rotationTarget
+        planetTransformAnimation.restart()
     }
 
     PlanetSurfaceMaterial {
-        id: planetMaterial
+        id: planetMaterial__
         diameter: radius
+        sun: sun
+    }
+
+    PhongMaterial {
+        id: planetMaterial_
+        ambient: "#FFAABB00"
+        diffuse: "#FFAABB00"
+        specular: "#FFFFFFFF"
+        shininess: 1.0
+    }
+
+    PerVertexColorMaterial {
+        id: planetMaterial
+//        parameters: [
+//            Parameter {
+//                name: "maincolor"
+//                value: Qt.vector3d(root.maincolor.r, root.maincolor.g, root.maincolor.b)
+//            }
+//        ]
     }
 
     SphereMesh {
-        id: sphereMesh
+        id: planetMesh
 
         generateTangents: true
         radius: root.radius
-        slices: 75
-        rings: 75
+        slices: 10
+        rings: 10
     }
 
     Transform {
-        id: sphereTransform
+        id: planetTransform
         property real userAngle: 0.0
         matrix: {
             var m = Qt.matrix4x4();
@@ -47,8 +67,8 @@ Entity {
     }
 
     QQ2.NumberAnimation {
-        id: sphereTransformAnimation
-        target: sphereTransform
+        id: planetTransformAnimation
+        target: planetTransform
         property: "userAngle"
         duration: rotationDuration
         from: 0
@@ -59,8 +79,8 @@ Entity {
     }
 
     Entity {
-        id: sphereEntity
-        components: [ sphereMesh, planetMaterial, sphereTransform ]
+        id: planetEntity
+        components: [ planetMesh, planetMaterial, planetTransform ]
     }
 
     function generate() {
