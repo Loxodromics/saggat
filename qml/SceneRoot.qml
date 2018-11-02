@@ -32,8 +32,8 @@ Entity {
     Entity {
         DirectionalLight {
             id: directional
-            worldDirection: Qt.vector3d(-0.3, -0.1, -0.5).normalized();
-            color: "#fff2a3"
+            worldDirection: Qt.vector3d(-0.3, -0.1, -0.3).normalized();
+            color: "#FFFFFFFF"
             intensity: 0.79
         }
         Transform {

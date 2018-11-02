@@ -121,12 +121,20 @@ void main() {
 	eSum *= heightScale;
 	float coldnessVariation = abs(fragPos.y / diameter) * abs(fragPos.y / diameter) * coldness;
 
+	vec4 specColor = vec4(0.0, 0.0, 0.0, 1.0);
 	vec4 outputColor = vec4(1.0, 0.0, 0.0, 1.0);
 	if (displayHeight) {
 		outputColor = vec4(eSum, eSum, eSum, 1.0);
 	}
 	else {
-		outputColor = vec4(terrainColor(eSum + coldnessVariation).xyz, 1.0);
+		vec4 tcol = terrainColor(eSum + coldnessVariation);
+		outputColor = vec4(tcol.xyz, 1.0);
+		if (tcol.w < 0.3) {
+			specColor = vec4(outputColor.xyz, 1.0) * 0.1;
+		}
+		else {
+			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
+		}
 	}
 
 	vec3 tNormal = worldTangent.xyz;
@@ -134,7 +142,8 @@ void main() {
 	mat3 invertTangentMatrix = transpose(tangentMatrix);
 	vec3 wNormal = normalize(invertTangentMatrix * tNormal);
 	vec3 worldView = normalize(eyePosition - worldPosition);
-	outputColor = phongFunction(outputColor * 0.1, outputColor, vec4(outputColor.xyz, 1.0) * (1.0 + outputColor.w), 0.0, worldPosition, worldView, worldNormal);
+
+	outputColor = phongFunction(outputColor * 0.1, outputColor, specColor, 0.0, worldPosition, worldView, worldNormal);
 
 	fragColor = vec4(outputColor.xyz, 1.0);
 }

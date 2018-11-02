@@ -37,23 +37,13 @@ Entity {
         shininess: 1.0
     }
 
-    PerVertexColorMaterial {
-        id: planetMaterial__
-//        parameters: [
-//            Parameter {
-//                name: "maincolor"
-//                value: Qt.vector3d(root.maincolor.r, root.maincolor.g, root.maincolor.b)
-//            }
-//        ]
-    }
-
     SphereMesh {
         id: planetMesh
 
         generateTangents: true
         radius: root.radius
-        slices: 10
-        rings: 10
+        slices: 100
+        rings: 100
     }
 
     Transform {
