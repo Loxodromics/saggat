@@ -109,7 +109,7 @@ vec4 terrainColor(float height) {
 		return vec4(0.586, 0.594, 0.541, 0.1);
 	}
 	else {
-		return vec4(0.986, 0.994, 0.941, 0.1);
+		return vec4(0.986, 0.994, 0.941, 0.5);
 	}
 }
 
@@ -123,17 +123,24 @@ void main() {
 
 	vec4 specColor = vec4(0.0, 0.0, 0.0, 1.0);
 	vec4 outputColor = vec4(1.0, 0.0, 0.0, 1.0);
+	float specVal = 0.0;
 	if (displayHeight) {
 		outputColor = vec4(eSum, eSum, eSum, 1.0);
 	}
 	else {
 		vec4 tcol = terrainColor(eSum + coldnessVariation);
 		outputColor = vec4(tcol.xyz, 1.0);
-		if (tcol.w < 0.3) {
-			specColor = vec4(outputColor.xyz, 1.0) * 0.1;
+		if ((tcol.w < 0.51) && (tcol.w > 0.49)) {
+			specColor = vec4(outputColor.xyz, 1.0) * 1.8;
+			specVal = 8.0 + 2.0 * eSum + cnoise(fragPos * planetScale * 32.0);
+		}
+		else if (tcol.w < 0.2) {
+			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
+			specVal = 1.0 + eSum + cnoise(fragPos * planetScale * 8.0);
 		}
 		else {
 			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
+			specVal = 8.0 + 3.0 * cnoise(fragPos * planetScale * 32.0);
 		}
 	}
 
@@ -143,7 +150,7 @@ void main() {
 	vec3 wNormal = normalize(invertTangentMatrix * tNormal);
 	vec3 worldView = normalize(eyePosition - worldPosition);
 
-	outputColor = phongFunction(outputColor * 0.1, outputColor, specColor, 0.0, worldPosition, worldView, worldNormal);
+	outputColor = phongFunction(outputColor * 0.2, outputColor, specColor, specVal, worldPosition, worldView, worldNormal);
 
 	fragColor = vec4(outputColor.xyz, 1.0);
 }
