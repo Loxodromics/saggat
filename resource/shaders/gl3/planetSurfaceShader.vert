@@ -122,8 +122,10 @@ void main()
 
 	vec3 vertexNormalNorm = normalize(vertexNormal);
 
-	vec4 vvpos = vec4(vertexPosition, 1.0) + vec4(vertexNormalNorm * (1.0 + eSum) * 10.0 , 1.0);
-
+	vec4 vvpos = vec4(vertexPosition, 1.0);
+	if (false) { /// turn of elevation for the moment
+		vec4(vertexNormalNorm * (1.0 + eSum) * 10.0 , 1.0);
+	}
 	// Calculate vertex position in clip coordinates
 	gl_Position = modelViewProjection * vvpos;
 	fragPos = vertexPosition;
