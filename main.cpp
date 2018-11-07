@@ -12,6 +12,7 @@
 #include "src/common/values.h"
 #include "src/generation/generator.h"
 #include "src/graphics/planetsurfacematerial.h"
+#include "src/graphics/moonsurfacematerial.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,6 +24,7 @@ int main(int argc, char *argv[])
 	QSurfaceFormat::setDefaultFormat(defaultFormat);
 
 	qmlRegisterType<Saggat::PlanetSurfaceMaterial>("Saggat", 1, 0, "PlanetSurfaceMaterial");
+	qmlRegisterType<Saggat::MoonSurfaceMaterial>("Saggat", 1, 0, "MoonSurfaceMaterial");
 
 	QGuiApplication app(argc, argv);
 

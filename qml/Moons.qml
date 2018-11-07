@@ -26,7 +26,8 @@ Entity {
                 "angleOffset": Math.random() * 360,
                 "moonAngle": Generator.moonAxis(),
                 "moonAxis":  Generator.moonAngle(),
-                "sun": sun
+                "sun": sun,
+                "seed": Math.random() * 300 + 10
             });
 
             moonModel.orbitalDistance = Generator.moonOrbitalDistance(planetSize, moonModel.radius)

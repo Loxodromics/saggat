@@ -10,5 +10,6 @@
         <file>qml/Moon.qml</file>
         <file>qml/PlanetSurfaceMaterialQml.qml</file>
         <file>qml/Sun.qml</file>
+        <file>qml/MoonSurfaceMaterialQml.qml</file>
     </qresource>
 </RCC>

@@ -19,7 +19,8 @@ SOURCES += \
         main.cpp \
         src/common/values.cpp \
         src/generation/generator.cpp \
-        src/graphics/planetsurfacematerial.cpp
+        src/graphics/planetsurfacematerial.cpp \
+    ../saggat/src/graphics/moonsurfacematerial.cpp
 
 RESOURCES += qml.qrc \
     ../saggat/resource/textures.qrc \
@@ -39,4 +40,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
         src/common/values.h \
         src/generation/generator.h \
-        src/graphics/planetsurfacematerial.h
+        src/graphics/planetsurfacematerial.h \
+    ../saggat/src/graphics/moonsurfacematerial.h

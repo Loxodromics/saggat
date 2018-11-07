@@ -1,6 +1,6 @@
 //
 //  planetsurfacematerial.cpp
-//  %PROJECT_NAME%
+//  Saggat
 //
 //  Created by philipp2 on 02.11.2018.
 //  Copyright (c) 2018 Philipp Engelhard. All rights reserved.
