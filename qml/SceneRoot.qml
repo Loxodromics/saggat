@@ -49,12 +49,14 @@ Entity {
 
         onWheel: {
             if (wheel.angleDelta.y < 0) {
-                camera.position.y += 2
-                camera.position.z += 3
+                camera.position.x += camera.position.x * 0.1
+                camera.position.y += camera.position.y * 0.1
+                camera.position.z += camera.position.z * 0.1
             }
             else {
-                camera.position.y -= 2
-                camera.position.z -= 3
+                camera.position.x -= camera.position.x * 0.1
+                camera.position.y -= camera.position.y * 0.1
+                camera.position.z -= camera.position.z * 0.1
             }
         }
     }
