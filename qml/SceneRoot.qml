@@ -16,7 +16,7 @@ Entity {
         farPlane : 1000.0
         position: Qt.vector3d( 0.0, 40.0, 60.0 )
         upVector: Qt.vector3d( 0.0, 1.0, 0.0 )
-        viewCenter: Qt.vector3d( 0.0, -3.0, 0.0 )
+        viewCenter: Qt.vector3d( 0.0, 0.0, 0.0 )
     }
 
     components: [
@@ -26,8 +26,38 @@ Entity {
                 clearColor: "transparent"
             }
         },
-        InputSettings { }
+        InputSettings {
+
+        }
     ]
+
+    OrbitCameraController {
+            id: orbitCameraController
+
+            camera: camera
+            linearSpeed: 0.0
+        }
+
+    MouseDevice {
+        id: mouseDevice
+    }
+
+    MouseHandler {
+        id: mouseHander
+
+        sourceDevice: mouseDevice
+
+        onWheel: {
+            if (wheel.angleDelta.y < 0) {
+                camera.position.y += 2
+                camera.position.z += 3
+            }
+            else {
+                camera.position.y -= 2
+                camera.position.z -= 3
+            }
+        }
+    }
 
     Entity {
         DirectionalLight {
