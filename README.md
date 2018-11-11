@@ -20,3 +20,5 @@ It's a fun project good for nothing.
 * many, this is work in progress
 * provides currently only shaders for OpenGL 3
 
+# Images
+<img src="https://github.com/Loxodromics/saggat/raw/master/screenshots/saggat0.gif">
