@@ -7,6 +7,7 @@ It's a fun project good for nothing.
 
 
 ##Build
+
 ###Perquisites
 * Qt 5.11 (I only tested that version)
 * OpenGL 3+ drivers
@@ -19,4 +20,3 @@ It's a fun project good for nothing.
 * many, this is work in progress
 * provides currently only shaders for OpenGL 3
 
-## Images
