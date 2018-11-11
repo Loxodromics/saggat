@@ -6,17 +6,17 @@ This is early stage work in progress. Have Fun!
 It's a fun project good for nothing.
 
 
-##Build
+## Build
 
-###Perquisites
+### Perquisites
 * Qt 5.11 (I only tested that version)
 * OpenGL 3+ drivers
 
-###Steps
+### Steps
 * check out
 * Open and build `saggat.pro` in QtCreator. Easy as that!
 
-##Issues
+## Issues
 * many, this is work in progress
 * provides currently only shaders for OpenGL 3
 
