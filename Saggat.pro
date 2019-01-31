@@ -24,7 +24,8 @@ SOURCES += \
 
 RESOURCES += qml.qrc \
     ../saggat/resource/textures.qrc \
-    ../saggat/resource/shader.qrc
+    ../saggat/resource/shader.qrc \
+    resource/models.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

@@ -11,5 +11,7 @@
         <file>qml/PlanetSurfaceMaterialQml.qml</file>
         <file>qml/Sun.qml</file>
         <file>qml/MoonSurfaceMaterialQml.qml</file>
+        <file>qml/Vegetation.qml</file>
+        <file>qml/Tree.qml</file>
     </qresource>
 </RCC>

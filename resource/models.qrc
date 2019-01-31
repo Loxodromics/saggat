@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>models/tree0.dae</file>
+        <file>models/tree2.3ds</file>
+        <file>models/tree1.dae</file>
+    </qresource>
+</RCC>

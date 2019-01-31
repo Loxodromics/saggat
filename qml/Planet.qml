@@ -70,7 +70,18 @@ Entity {
 
     Entity {
         id: planetEntity
-        components: [ planetMesh, planetMaterial, planetTransform ]
+
+//        Tree {
+//            id: tree
+//            radius: root.radius
+//        }
+
+        Vegetation {
+            id: vegitation
+            planetSize: root.radius
+        }
+
+        components: [ planetMesh, planetMaterial, planetTransform, vegitation ]
     }
 
     function generate() {
@@ -78,6 +89,9 @@ Entity {
         if (Math.random() < 0.5) {
             rotationTarget *= -1
         }
+
+        vegitation.planetSize = root.radius
+        vegitation.generate()
     }
 
 }
