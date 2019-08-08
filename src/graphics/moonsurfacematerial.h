@@ -24,7 +24,7 @@
 
 namespace Saggat {
 
-class QT3DRENDERSHARED_EXPORT MoonSurfaceMaterial : public Qt3DRender::QMaterial
+class MoonSurfaceMaterial : public Qt3DRender::QMaterial
 {
 	Q_OBJECT
 

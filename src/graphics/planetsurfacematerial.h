@@ -37,7 +37,7 @@
 
 namespace Saggat {
 
-class QT3DRENDERSHARED_EXPORT PlanetSurfaceMaterial : public Qt3DRender::QMaterial
+class PlanetSurfaceMaterial : public Qt3DRender::QMaterial
 {
 	Q_OBJECT
 
