@@ -54,15 +54,13 @@ protected:
 	Qt3DRender::QParameter *m_specularParameter;
 	Qt3DRender::QParameter *m_shininessParameter;
 	Qt3DRender::QTechnique *m_planetSurfaceGL3Technique;
-	Qt3DRender::QTechnique *m_planetSurfaceGL2Technique;
-	Qt3DRender::QTechnique *m_planetSurfaceES2Technique;
+	Qt3DRender::QTechnique *m_planetSurfaceES3Technique;
 	Qt3DRender::QRenderPass *m_planetSurfaceGL3RenderPass;
-	Qt3DRender::QRenderPass *m_planetSurfaceGL2RenderPass;
-	Qt3DRender::QRenderPass *m_planetSurfaceES2RenderPass;
+	Qt3DRender::QRenderPass *m_planetSurfaceES3RenderPass;
 	Qt3DRender::QShaderProgram *m_planetSurfaceGL3Shader;
 	Qt3DRender::QShaderProgramBuilder *m_planetSurfaceGL3ShaderBuilder;
-	Qt3DRender::QShaderProgram *m_planetSurfaceGL2ES2Shader;
-	Qt3DRender::QShaderProgramBuilder *m_planetSurfaceGL2ES2ShaderBuilder;
+	Qt3DRender::QShaderProgram *m_planetSurfaceES3Shader;
+	Qt3DRender::QShaderProgramBuilder *m_planetSurfaceES3ShaderBuilder;
 	Qt3DRender::QFilterKey *m_filterKey;
 };
 
