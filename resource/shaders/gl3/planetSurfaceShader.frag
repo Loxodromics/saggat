@@ -1,5 +1,6 @@
 #version 330 core
-//precision mediump float;
+//precision highp float;
+
 in vec4 vertexColor;
 in vec3 fragPos;
 in vec3 worldPosition;
@@ -39,8 +40,8 @@ float cnoise(vec3 P) {
 	vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
 	vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
 	vec4 iy = vec4(Pi0.yy, Pi1.yy);
-	vec4 iz0 = Pi0.zzzz;
-	vec4 iz1 = Pi1.zzzz;
+	vec4 iz0 = vec4(Pi0.zz, Pi0.zz);
+	vec4 iz1 = vec4(Pi1.zz, Pi1.zz);
 
 	vec4 ixy = permute(permute(ix) + iy);
 	vec4 ixy0 = permute(ixy + iz0);
