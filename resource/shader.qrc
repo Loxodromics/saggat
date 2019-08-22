@@ -8,5 +8,6 @@
         <file>shaders/es3/moonSurfaceShader.vert</file>
         <file>shaders/gl3/moonSurfaceShader.frag</file>
         <file>shaders/gl3/moonSurfaceShader.vert</file>
+        <file>shaders/common/perlinnoise.inc</file>
     </qresource>
 </RCC>
