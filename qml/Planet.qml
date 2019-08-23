@@ -4,6 +4,8 @@ import Qt3D.Extras 2.0
 
 import QtQuick 2.0 as QQ2
 
+import LFD 1.0
+
 Entity {
     id: root
 
@@ -37,13 +39,20 @@ Entity {
         shininess: 1.0
     }
 
-    SphereMesh {
+//    SphereMesh {
+//        id: planetMesh
+
+//        generateTangents: true
+//        radius: root.radius
+//        slices: 100
+//        rings: 100
+//    }
+
+    GeosphereMesh {
         id: planetMesh
 
-        generateTangents: true
         radius: root.radius
-        slices: 100
-        rings: 100
+        subdivisions: 3
     }
 
     Transform {

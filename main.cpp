@@ -13,6 +13,7 @@
 #include "src/generation/generator.h"
 #include "src/graphics/planetsurfacematerial.h"
 #include "src/graphics/moonsurfacematerial.h"
+#include "src/graphics/geospheremesh.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +26,7 @@ int main(int argc, char *argv[])
 
 	qmlRegisterType<Saggat::PlanetSurfaceMaterial>("Saggat", 1, 0, "PlanetSurfaceMaterial");
 	qmlRegisterType<Saggat::MoonSurfaceMaterial>("Saggat", 1, 0, "MoonSurfaceMaterial");
+	qmlRegisterType<GeosphereMesh>("LFD", 1, 0, "GeosphereMesh");
 
 	QGuiApplication app(argc, argv);
 

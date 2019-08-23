@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ../saggat/src/graphics/geospheregeometry.cpp \
+    ../saggat/src/graphics/geospheremesh.cpp \
         main.cpp \
         src/common/values.cpp \
         src/generation/generator.cpp \
@@ -38,6 +40,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    ../saggat/src/graphics/geospheregeometry.h \
+    ../saggat/src/graphics/geospheremesh.h \
         src/common/values.h \
         src/generation/generator.h \
         src/graphics/planetsurfacematerial.h \

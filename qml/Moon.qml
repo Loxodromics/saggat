@@ -2,6 +2,7 @@ import Qt3D.Core 2.0
 import Qt3D.Render 2.0
 import Qt3D.Extras 2.0
 import Saggat 1.0
+import LFD 1.0
 
 import QtQuick 2.0 as QQ2
 
@@ -47,11 +48,11 @@ Entity {
 //        }
 //    }
 
-    SphereMesh {
+    GeosphereMesh {
         id: moonMesh
 
-        generateTangents: true
         radius: root.radius
+        subdivisions: 1
     }
 
     Transform {
