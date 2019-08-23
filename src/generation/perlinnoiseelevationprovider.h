@@ -19,7 +19,15 @@ public:
 	virtual double elevationAt(const double x, const double y, const double z) override;
 
 protected:
+	double noiseElevation(double x, double y, double z);
+
 	PerlinNoise m_perlinElevation;
+	double m_e0 = 1.00;
+	double m_e1 = 0.50;
+	double m_e2 = 0.25;
+	double m_e3 = 0.13;
+	double m_e4 = 0.06;
+	double m_e5 = 0.03;
 };
 
 #endif // PERLINNOISEELEVATIONPROVIDER_H

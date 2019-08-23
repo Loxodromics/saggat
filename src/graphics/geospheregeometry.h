@@ -8,7 +8,7 @@
 #ifndef GEOSPHEREGEOMETRY_H
 #define GEOSPHEREGEOMETRY_H
 
-#include "src/generation/perlinnoiseelevationprovider.h"
+#include "src/generation/elevationprovider.h"
 #include <Qt3DExtras/qt3dextras_global.h>
 #include <Qt3DRender/qgeometry.h>
 
@@ -36,6 +36,9 @@ public:
 	float radius() const;
 	unsigned int subdivisions() const;
 
+	QSharedPointer<ElevationProvider> elevationProvider() const;
+	void setElevationProvider(const QSharedPointer<ElevationProvider>& elevationProvider);
+
 public slots:
 	void setRadius(float radius);
 	void setSubdivisions(unsigned int subdivisions);
@@ -54,7 +57,7 @@ protected:
 	Qt3DRender::QBuffer* m_vertexBuffer = nullptr;
 	Qt3DRender::QBuffer* m_indexBuffer = nullptr;
 
-	QSharedPointer<PerlinNoiseElevationProvider> m_perlinNoiseElevationProvider;
+	QSharedPointer<ElevationProvider> m_elevationProvider;
 
 	float m_radius = 1.0f;
 	unsigned int m_subdivisions = 0;

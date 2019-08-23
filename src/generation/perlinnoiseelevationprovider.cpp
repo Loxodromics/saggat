@@ -15,5 +15,18 @@ PerlinNoiseElevationProvider::PerlinNoiseElevationProvider(unsigned int seed)
 
 double PerlinNoiseElevationProvider::elevationAt(const double x, const double y, const double z)
 {
-	return this->m_perlinElevation.noise(x, y, z);
+	double elevation = m_e0 * this->noiseElevation(x, y, z);
+	elevation += m_e1 *	this->noiseElevation(x * 2,  y * 2,  z);
+	elevation += m_e2 *	this->noiseElevation(x * 4,  y * 4,  z);
+	elevation += m_e3 *	this->noiseElevation(x * 8,  y * 8,  z);
+	elevation += m_e4 *	this->noiseElevation(x * 16, y * 16, z);
+	elevation += m_e5 *	this->noiseElevation(x * 32, y * 32, z);
+
+	return elevation;
+}
+
+double PerlinNoiseElevationProvider::noiseElevation(double x, double y, double z)
+{
+	/// magigic numbers to spread the values, "noise" doesn't range from 0 to 1
+	return (this->m_perlinElevation.noise(x, y, z) - 0.363484) * (1/0.386516);
 }
