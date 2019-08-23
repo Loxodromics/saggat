@@ -106,7 +106,7 @@ IndexedMesh makeGeoSphere(unsigned int subdivisions)
 	return { vertices, triangles };
 }
 
-QByteArray createGeosphereMeshVertexData(VertexList vertices, float radius)
+QByteArray createGeosphereMeshVertexData(VertexList vertices, float radius, QSharedPointer<ElevationProvider> elevationProvider)
 {
 	QByteArray bufferBytes;
 	/// vec3 pos and vec3 normal
@@ -118,9 +118,9 @@ QByteArray createGeosphereMeshVertexData(VertexList vertices, float radius)
 	float* fptr = reinterpret_cast<float*>(bufferBytes.data());
 
 	for (auto vertex : vertices) {
-		*fptr++ = vertex.x() * radius;
-		*fptr++ = vertex.y() * radius;
-		*fptr++ = vertex.z() * radius;
+		*fptr++ = vertex.x() * radius * static_cast<float>(elevationProvider->elevationAt(vertex.x(), vertex.y(), vertex.z()));
+		*fptr++ = vertex.y() * radius * static_cast<float>(elevationProvider->elevationAt(vertex.x(), vertex.y(), vertex.z()));
+		*fptr++ = vertex.z() * radius * static_cast<float>(elevationProvider->elevationAt(vertex.x(), vertex.y(), vertex.z()));
 
 		auto normal = vertex.normalized();
 		*fptr++ = normal.x();
@@ -153,13 +153,14 @@ QByteArray createGeosphereMeshIndexData(TriangleList triangles)
 
 class GeosphereVertexDataFunctor : public Qt3DRender::QBufferDataGenerator {
 public:
-	GeosphereVertexDataFunctor(VertexList vertices, float radius)
+	GeosphereVertexDataFunctor(VertexList vertices, float radius, QSharedPointer<ElevationProvider> elevationProvider)
 		: m_vertices(vertices)
 		, m_radius(radius)
+		, m_elevationProvider(elevationProvider)
 	{
 	}
 
-	QByteArray operator()() override { return createGeosphereMeshVertexData(this->m_vertices, this->m_radius); }
+	QByteArray operator()() override { return createGeosphereMeshVertexData(this->m_vertices, this->m_radius, this->m_elevationProvider); }
 
 	bool operator==(const QBufferDataGenerator& other) const override
 	{
@@ -174,6 +175,7 @@ public:
 private:
 	VertexList m_vertices;
 	float m_radius;
+	QSharedPointer<ElevationProvider> m_elevationProvider;
 };
 
 class GeosphereIndexDataFunctor : public QBufferDataGenerator {
@@ -206,6 +208,7 @@ GeosphereGeometry::GeosphereGeometry(Qt3DCore::QNode* parent)
 	, m_normalAttribute(nullptr)
 	, m_vertexBuffer(nullptr)
 	, m_indexBuffer(nullptr)
+	, m_perlinNoiseElevationProvider( QSharedPointer<PerlinNoiseElevationProvider>::create(PerlinNoiseElevationProvider(1)) )
 {
 	this->init();
 }
@@ -280,7 +283,7 @@ void GeosphereGeometry::init()
 	this->m_indexAttribute->setCount(nVerts);
 
 	this->m_vertexBuffer->setDataGenerator(
-	  QSharedPointer<GeosphereVertexDataFunctor>::create(verticesTriangles.first, this->m_radius));
+	  QSharedPointer<GeosphereVertexDataFunctor>::create(verticesTriangles.first, this->m_radius, this->m_perlinNoiseElevationProvider));
 	this->m_indexBuffer->setDataGenerator(QSharedPointer<GeosphereIndexDataFunctor>::create(verticesTriangles.second));
 
 	this->addAttribute(this->m_positionAttribute);
@@ -297,6 +300,6 @@ void GeosphereGeometry::update()
 	this->m_normalAttribute->setCount(nVerts);
 	this->m_indexAttribute->setCount(nVerts);
 	this->m_vertexBuffer->setDataGenerator(
-	  QSharedPointer<GeosphereVertexDataFunctor>::create(verticesTriangles.first, this->m_radius));
+	  QSharedPointer<GeosphereVertexDataFunctor>::create(verticesTriangles.first, this->m_radius, this->m_perlinNoiseElevationProvider));
 	this->m_indexBuffer->setDataGenerator(QSharedPointer<GeosphereIndexDataFunctor>::create(verticesTriangles.second));
 }

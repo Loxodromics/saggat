@@ -8,6 +8,7 @@
 #ifndef GEOSPHEREGEOMETRY_H
 #define GEOSPHEREGEOMETRY_H
 
+#include "src/generation/perlinnoiseelevationprovider.h"
 #include <Qt3DExtras/qt3dextras_global.h>
 #include <Qt3DRender/qgeometry.h>
 
@@ -52,6 +53,8 @@ protected:
 	Qt3DRender::QAttribute* m_normalAttribute = nullptr;
 	Qt3DRender::QBuffer* m_vertexBuffer = nullptr;
 	Qt3DRender::QBuffer* m_indexBuffer = nullptr;
+
+	QSharedPointer<PerlinNoiseElevationProvider> m_perlinNoiseElevationProvider;
 
 	float m_radius = 1.0f;
 	unsigned int m_subdivisions = 0;

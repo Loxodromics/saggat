@@ -18,7 +18,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         src/common/values.cpp \
+        src/generation/elevationprovider.cpp \
         src/generation/generator.cpp \
+        src/generation/perlinnoiseelevationprovider.cpp \
         src/graphics/geospheregeometry.cpp \
         src/graphics/geospheremesh.cpp \
         src/graphics/moonsurfacematerial.cpp \
@@ -42,7 +44,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
         src/common/values.h \
+        src/generation/elevationprovider.h \
         src/generation/generator.h \
+        src/generation/perlinnoiseelevationprovider.h \
         src/graphics/geospheregeometry.h \
         src/graphics/geospheremesh.h \
         src/graphics/moonsurfacematerial.h \
