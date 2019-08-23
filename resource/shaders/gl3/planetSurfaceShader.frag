@@ -39,11 +39,46 @@ vec4 terrainColor(float height) {
 	}
 }
 
+vec4 heightColor(float height) {
+	if (height < 0.1) {
+		return vec4(0.999, 0.0, 0.999, 1.0);
+	}
+	else if (height < 0.2) {
+		return vec4(0.0, 0.1, 0.0, 0.1);
+	}
+	else if (height < 0.3) {
+		return vec4(0.0, 0.0, 0.1, 0.1);
+	}
+	else if (height < 0.4) {
+		return vec4(0.3, 0.0, 0.0, 0.1);
+	}
+	else if (height < 0.5) {
+		return vec4(0.0, 0.3, 0.0, 0.1);
+	}
+	else if (height < 0.6) {
+		return vec4(0.0, 0.0, 0.3, 0.1);
+	}
+	else if (height < 0.7) {
+		return vec4(0.6, 0.0, 0.0, 0.1);
+	}
+	else if (height < 0.8) {
+		return vec4(0.0, 0.6, 0.0, 0.1);
+	}
+	else if (height < 0.9) {
+		return vec4(0.0, 0.0, 0.6, 0.1);
+	}
+	else {
+		return vec4(0.986, 0.994, 0.941, 0.5);
+	}
+}
+
 void main() {
-	float e = e0 * cnoise(fragPos * planetScale * 1.0);
-	e += e1 * cnoise(fragPos * planetScale * 2.0);
-	e += e2 * cnoise(fragPos * planetScale * 4.0);
-	float eSum = e / (e0 + e1 + e2);
+//	float e = e0 * cnoise(fragPos * planetScale * 1.0);
+//	e += e1 * cnoise(fragPos * planetScale * 2.0);
+//	e += e2 * cnoise(fragPos * planetScale * 4.0);
+//	float eSum = e / (e0 + e1 + e2);
+//	float eSum = (length(fragPos) - 1.0) * 4.0;
+	float eSum = (length(fragPos) / diameter - 1.0) * 4.0;
 	eSum *= heightScale;
 	float coldnessVariation = abs(fragPos.y / diameter) * abs(fragPos.y / diameter) * coldness;
 
@@ -52,22 +87,23 @@ void main() {
 	float specVal = 0.0;
 	if (displayHeight) {
 		outputColor = vec4(eSum, eSum, eSum, 1.0);
+		outputColor = heightColor(eSum);
 	}
 	else {
 		vec4 tcol = terrainColor(eSum + coldnessVariation);
 		outputColor = vec4(tcol.xyz, 1.0);
-		if ((tcol.w < 0.51) && (tcol.w > 0.49)) {
-			specColor = vec4(outputColor.xyz, 1.0) * 1.8;
-			specVal = 8.0 + 2.0 * eSum + cnoise(fragPos * planetScale * 32.0);
-		}
-		else if (tcol.w < 0.2) {
-			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
-			specVal = 1.0 + eSum + cnoise(fragPos * planetScale * 8.0);
-		}
-		else {
-			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
-			specVal = 8.0 + 3.0 * cnoise(fragPos * planetScale * 32.0);
-		}
+//		if ((tcol.w < 0.51) && (tcol.w > 0.49)) {
+//			specColor = vec4(outputColor.xyz, 1.0) * 1.8;
+//			specVal = 8.0 + 2.0 * eSum + cnoise(fragPos * planetScale * 32.0);
+//		}
+//		else if (tcol.w <= 0.2) {
+//			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
+//			specVal = 1.0 + eSum + cnoise(fragPos * planetScale * 8.0);
+//		}
+//		else {
+//			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
+//			specVal = 8.0 + 3.0 * cnoise(fragPos * planetScale * 32.0);
+//		}
 	}
 
 	vec3 tNormal = worldTangent.xyz;
@@ -76,7 +112,7 @@ void main() {
 	vec3 wNormal = normalize(invertTangentMatrix * tNormal);
 	vec3 worldView = normalize(eyePosition - worldPosition);
 
-	outputColor = phongFunction(outputColor * 0.2, outputColor, specColor, specVal, worldPosition, worldView, worldNormal);
+//	outputColor = phongFunction(outputColor * 0.2, outputColor, specColor, specVal, worldPosition, worldView, worldNormal);
 
 	fragColor = vec4(outputColor.xyz, 1.0);
 }

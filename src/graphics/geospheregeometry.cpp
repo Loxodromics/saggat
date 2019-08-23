@@ -124,7 +124,7 @@ QByteArray createGeosphereMeshVertexData(VertexList vertices, float radius, QSha
 		if (!elevationProvider.isNull())
 		{
 			elevation = static_cast<float>(elevationProvider->elevationAt(vertex.x(), vertex.y(), vertex.z()));
-			elevation *= 0.2f;
+			elevation *= 0.1f;
 			elevation += 1.0f;
 		}
 		*fptr++ = vertex.x() * radius * elevation;
