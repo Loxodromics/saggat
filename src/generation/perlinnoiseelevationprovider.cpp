@@ -22,6 +22,7 @@ double PerlinNoiseElevationProvider::elevationAt(const double x, const double y,
 	elevation += m_e4 *	this->noiseElevation(x * 16, y * 16, z * 16);
 	elevation += m_e5 *	this->noiseElevation(x * 32, y * 32, z * 32);
 
+	elevation /= m_e0 + m_e1 + m_e2 + m_e3 + m_e4 + m_e5;
 
 	return elevation;
 }

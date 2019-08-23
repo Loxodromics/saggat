@@ -27,7 +27,7 @@ Entity {
 
     PlanetSurfaceMaterialQml {
         id: planetMaterial
-        diameter: radius
+        diameter: root.radius
         sun: sun
     }
 

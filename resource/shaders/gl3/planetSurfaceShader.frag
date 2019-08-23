@@ -73,13 +73,10 @@ vec4 heightColor(float height) {
 }
 
 void main() {
-//	float e = e0 * cnoise(fragPos * planetScale * 1.0);
-//	e += e1 * cnoise(fragPos * planetScale * 2.0);
-//	e += e2 * cnoise(fragPos * planetScale * 4.0);
-//	float eSum = e / (e0 + e1 + e2);
+	float factor = 0.4;
 //	float eSum = (length(fragPos) - 1.0) * 4.0;
-	float eSum = (length(fragPos) / diameter - 1.0) * 4.0;
-	eSum *= heightScale;
+	float eSum = (length(fragPos) - diameter) / (diameter * factor);
+//	eSum *= heightScale;
 	float coldnessVariation = abs(fragPos.y / diameter) * abs(fragPos.y / diameter) * coldness;
 
 	vec4 specColor = vec4(0.0, 0.0, 0.0, 1.0);
@@ -90,8 +87,9 @@ void main() {
 		outputColor = heightColor(eSum);
 	}
 	else {
-		vec4 tcol = terrainColor(eSum + coldnessVariation);
-		outputColor = vec4(tcol.xyz, 1.0);
+		outputColor = terrainColor(eSum);
+//		vec4 tcol = terrainColor(eSum + coldnessVariation);
+//		outputColor = vec4(tcol.xyz, 1.0);
 //		if ((tcol.w < 0.51) && (tcol.w > 0.49)) {
 //			specColor = vec4(outputColor.xyz, 1.0) * 1.8;
 //			specVal = 8.0 + 2.0 * eSum + cnoise(fragPos * planetScale * 32.0);
