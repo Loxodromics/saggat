@@ -8,7 +8,7 @@
 #ifndef PERLINNOISEELEVATIONPROVIDER_H
 #define PERLINNOISEELEVATIONPROVIDER_H
 
-#include "src/generation/elevationprovider.h"
+#include "elevationprovider.h"
 #include "src/thirdparty/perlinnoise.h"
 
 namespace Saggat {

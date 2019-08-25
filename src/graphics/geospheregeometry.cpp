@@ -7,6 +7,7 @@
 //
 #include "geospheregeometry.h"
 #include "src/generation/perlinnoiseelevationprovider.h"
+#include "src/generation/simplexnoiseelevationprovider.h"
 
 #include <QVector3D>
 #include <Qt3DRender/QAttribute>
@@ -223,7 +224,7 @@ GeosphereGeometry::GeosphereGeometry(Qt3DCore::QNode* parent)
 	, m_normalAttribute(nullptr)
 	, m_vertexBuffer(nullptr)
 	, m_indexBuffer(nullptr)
-	, m_elevationProvider(QSharedPointer<Saggat::PerlinNoiseElevationProvider>::create(Saggat::Values::getInstance().terrainSeed()))
+	, m_elevationProvider(QSharedPointer<Saggat::SimplexNoiseElevationProvider>::create(5))
 {
 	this->init();
 }
@@ -309,7 +310,7 @@ void GeosphereGeometry::init()
 void GeosphereGeometry::update()
 {
 	///FIXME: this is currently needed to regenerate geometry
-	this->m_elevationProvider = QSharedPointer<Saggat::PerlinNoiseElevationProvider>::create(Saggat::Values::getInstance().terrainSeed());
+	this->m_elevationProvider = QSharedPointer<Saggat::SimplexNoiseElevationProvider>::create(5);
 
 	auto verticesTriangles = makeGeoSphere(this->m_subdivisions);
 

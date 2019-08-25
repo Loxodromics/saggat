@@ -21,6 +21,7 @@ SOURCES += \
         src/generation/elevationprovider.cpp \
         src/generation/generator.cpp \
         src/generation/perlinnoiseelevationprovider.cpp \
+        src/generation/simplexnoiseelevationprovider.cpp \
         src/graphics/geospheregeometry.cpp \
         src/graphics/geospheremesh.cpp \
         src/graphics/moonsurfacematerial.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
         src/generation/elevationprovider.h \
         src/generation/generator.h \
         src/generation/perlinnoiseelevationprovider.h \
+        src/generation/simplexnoiseelevationprovider.h \
         src/graphics/geospheregeometry.h \
         src/graphics/geospheremesh.h \
         src/graphics/moonsurfacematerial.h \
