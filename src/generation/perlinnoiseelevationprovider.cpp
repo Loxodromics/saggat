@@ -39,15 +39,15 @@ double PerlinNoiseElevationProvider::elevationAt(const double x, const double y,
 //	if (elevation < 0.09)
 //		elevation = 0.09;
 
-//	if (elevation > m_max) {
-//		m_max = elevation;
-//		qDebug() << "min: " << m_min << "max: " << m_max;
-//	}
+	if (elevation > m_max) {
+		m_max = elevation;
+		qDebug() << "min: " << m_min << "max: " << m_max;
+	}
 
-//	if (elevation < m_min) {
-//		m_min = elevation;
-//		qDebug() << "min: " << m_min << "max: " << m_max;
-//	}
+	if (elevation < m_min) {
+		m_min = elevation;
+		qDebug() << "min: " << m_min << "max: " << m_max;
+	}
 
 	return elevation;
 }
@@ -55,7 +55,7 @@ double PerlinNoiseElevationProvider::elevationAt(const double x, const double y,
 double PerlinNoiseElevationProvider::noiseElevation(double x, double y, double z)
 {
 	/// magigic numbers to spread the values, "noise" doesn't range from 0 to 1
-	return (this->m_perlinElevation.noise(x, y, z));// - 0.204689) * (1.0 / 0.612697);
+	return (this->m_perlinElevation.noise(x, y, z) - 0.3) * 2.0;
 	//0.612697
 //	min:  0.218218 max:  0.767998
 //	min:  0.26793 max:  0.768394

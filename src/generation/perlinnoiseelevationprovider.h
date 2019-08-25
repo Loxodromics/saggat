@@ -13,8 +13,7 @@
 
 namespace Saggat {
 
-class PerlinNoiseElevationProvider : public ElevationProvider
-{
+class PerlinNoiseElevationProvider : public ElevationProvider {
 public:
 	explicit PerlinNoiseElevationProvider(unsigned int seed);
 
@@ -35,6 +34,6 @@ protected:
 	double m_max = 0.0;
 };
 
-} /// namespace Saggat
+}	/// namespace Saggat
 
-#endif // PERLINNOISEELEVATIONPROVIDER_H
+#endif	// PERLINNOISEELEVATIONPROVIDER_H
