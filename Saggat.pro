@@ -25,7 +25,8 @@ SOURCES += \
         src/graphics/geospheremesh.cpp \
         src/graphics/moonsurfacematerial.cpp \
         src/graphics/planetsurfacematerial.cpp \
-        src/thirdparty/perlinnoise.cpp
+        src/thirdparty/perlinnoise.cpp \
+        src/thirdparty/simplexnoise.cpp
 
 RESOURCES += qml.qrc \
     ../saggat/resource/textures.qrc \
@@ -51,4 +52,5 @@ HEADERS += \
         src/graphics/geospheremesh.h \
         src/graphics/moonsurfacematerial.h \
         src/graphics/planetsurfacematerial.h \
-        src/thirdparty/perlinnoise.h
+        src/thirdparty/perlinnoise.h \
+        src/thirdparty/simplexnoise.h
