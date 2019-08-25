@@ -308,6 +308,9 @@ void GeosphereGeometry::init()
 
 void GeosphereGeometry::update()
 {
+	///FIXME: this is currently needed to regenerate geometry
+	this->m_elevationProvider = QSharedPointer<Saggat::PerlinNoiseElevationProvider>::create(Saggat::Values::getInstance().terrainSeed());
+
 	auto verticesTriangles = makeGeoSphere(this->m_subdivisions);
 
 	const uint nVerts = static_cast<uint>(verticesTriangles.second.size() * 3);
