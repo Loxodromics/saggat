@@ -11,6 +11,8 @@
 #include "src/generation/elevationprovider.h"
 #include "src/thirdparty/perlinnoise.h"
 
+namespace Saggat {
+
 class PerlinNoiseElevationProvider : public ElevationProvider
 {
 public:
@@ -28,6 +30,11 @@ protected:
 	double m_e3 = 0.13;
 	double m_e4 = 0.06;
 	double m_e5 = 0.03;
+
+	double m_min = 99999.9;
+	double m_max = 0.0;
 };
+
+} /// namespace Saggat
 
 #endif // PERLINNOISEELEVATIONPROVIDER_H

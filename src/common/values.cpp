@@ -35,7 +35,15 @@ Values::Values(QObject *parent)
 	  m_moonSizeVariance(1.0),
 	  m_moonOrbitalDistanceVariance(4.0),
 	  m_moonCountToPlanetSizeFactor(0.3),
-	  m_moonAngleVariance(10.0)
+	  m_moonAngleVariance(10.0),
+	  m_terrainE0(1.0),
+	  m_terrainE1(0.5),
+	  m_terrainE2(0.25),
+	  m_terrainE3(0.125),
+	  m_terrainE4(0.0625),
+	  m_terrainExp(1.0),
+	  m_terrainHeightFactor(0.3),
+	  m_terrainSeed(186)
 {
 
 }
@@ -95,9 +103,14 @@ QColor Values::ringBaseColor() const
 	return this->m_ringBaseColor;
 }
 
+qreal Values::ringAngleVariance() const
+{
+	return this->m_ringAngleVariance;
+}
+
 void Values::setPlanetBaseRadius(qreal planetBaseRadius)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if ( qFuzzyCompare(this->m_planetBaseRadius, planetBaseRadius) )
 		return;
 
@@ -107,7 +120,7 @@ void Values::setPlanetBaseRadius(qreal planetBaseRadius)
 
 void Values::setPlanetRadiusVariance(qreal planetRadiusVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if ( qFuzzyCompare(this->m_planetRadiusVariance, planetRadiusVariance) )
 		return;
 
@@ -126,7 +139,7 @@ void Values::setPlanetBaseRotationDuration(int planetBaseRotationDuration)
 
 void Values::setPlanetRotationDurationVariance(int planetRotationDurationVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if ( this->m_planetRotationDurationVariance == planetRotationDurationVariance )
 		return;
 
@@ -145,7 +158,7 @@ void Values::setPlanetMinRotationDuration(int planetMinRotationDuration)
 
 void Values::setRingBaseWidth(qreal ringBaseWidth)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_ringBaseWidth, ringBaseWidth))
 		return;
 
@@ -155,7 +168,7 @@ void Values::setRingBaseWidth(qreal ringBaseWidth)
 
 void Values::setRingWidthVariance(qreal ringWidthVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_ringWidthVariance, ringWidthVariance))
 		return;
 
@@ -165,7 +178,7 @@ void Values::setRingWidthVariance(qreal ringWidthVariance)
 
 void Values::setRingOrbitalDistance(qreal ringOrbitalDistance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_ringOrbitalDistance, ringOrbitalDistance))
 		return;
 
@@ -175,7 +188,7 @@ void Values::setRingOrbitalDistance(qreal ringOrbitalDistance)
 
 void Values::setRingOrbitalDistanceVariance(qreal ringOrbitalDistanceVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_ringOrbitalDistanceVariance, ringOrbitalDistanceVariance))
 		return;
 
@@ -185,7 +198,7 @@ void Values::setRingOrbitalDistanceVariance(qreal ringOrbitalDistanceVariance)
 
 void Values::setRingDensityFactor(qreal ringDensityFactor)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_ringDensityFactor, ringDensityFactor))
 		return;
 
@@ -195,7 +208,7 @@ void Values::setRingDensityFactor(qreal ringDensityFactor)
 
 void Values::setRingRotationTimeVariance(qreal ringRotationTimeVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_ringRotationTimeVariance, ringRotationTimeVariance))
 		return;
 
@@ -205,7 +218,7 @@ void Values::setRingRotationTimeVariance(qreal ringRotationTimeVariance)
 
 void Values::setMoonCountVariance(qreal moonCountVariance)
 {
-	if (this->m_moonCountVariance == moonCountVariance)
+	if (qFuzzyCompare(this->m_moonCountVariance, moonCountVariance))
 		return;
 
 	this->m_moonCountVariance = moonCountVariance;
@@ -214,7 +227,7 @@ void Values::setMoonCountVariance(qreal moonCountVariance)
 
 void Values::setMoonBaseSizeFactor(qreal moonBaseSizeFactor)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_moonBaseSizeFactor, moonBaseSizeFactor))
 		return;
 
@@ -224,7 +237,7 @@ void Values::setMoonBaseSizeFactor(qreal moonBaseSizeFactor)
 
 void Values::setMoonSizeVariance(qreal moonSizeVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_moonSizeVariance, moonSizeVariance))
 		return;
 
@@ -234,7 +247,7 @@ void Values::setMoonSizeVariance(qreal moonSizeVariance)
 
 void Values::setMoonOrbitalDistanceVariance(qreal moonOrbitalDistanceVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_moonOrbitalDistanceVariance, moonOrbitalDistanceVariance))
 		return;
 
@@ -244,7 +257,7 @@ void Values::setMoonOrbitalDistanceVariance(qreal moonOrbitalDistanceVariance)
 
 void Values::setMoonCountToPlanetSizeFactor(qreal moonCountToPlanetSizeFactor)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(m_moonCountToPlanetSizeFactor, moonCountToPlanetSizeFactor))
 		return;
 
@@ -254,7 +267,7 @@ void Values::setMoonCountToPlanetSizeFactor(qreal moonCountToPlanetSizeFactor)
 
 void Values::setMoonAngleVariance(qreal moonAngleVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_moonAngleVariance, moonAngleVariance))
 		return;
 
@@ -262,9 +275,88 @@ void Values::setMoonAngleVariance(qreal moonAngleVariance)
 	emit moonAngleVarianceChanged(this->m_moonAngleVariance);
 }
 
+void Values::setTerrainE0(qreal terrainE0)
+{
+
+	if (qFuzzyCompare(this->m_terrainE0, terrainE0))
+		return;
+
+	this->m_terrainE0 = terrainE0;
+	emit terrainE0Changed(this->m_terrainE0);
+}
+
+void Values::setTerrainE1(qreal terrainE1)
+{
+
+	if (qFuzzyCompare(this->m_terrainE1, terrainE1))
+		return;
+
+	this->m_terrainE1 = terrainE1;
+	emit terrainE1Changed(this->m_terrainE1);
+}
+
+void Values::setTerrainE2(qreal terrainE2)
+{
+
+	if (qFuzzyCompare(this->m_terrainE2, terrainE2))
+		return;
+
+	this->m_terrainE2 = terrainE2;
+	emit terrainE2Changed(this->m_terrainE2);
+}
+
+void Values::setTerrainE3(qreal terrainE3)
+{
+
+	if (qFuzzyCompare(this->m_terrainE3, terrainE3))
+		return;
+
+	this->m_terrainE3 = terrainE3;
+	emit terrainE3Changed(this->m_terrainE3);
+}
+
+void Values::setTerrainE4(qreal terrainE4)
+{
+
+	if (qFuzzyCompare(this->m_terrainE4, terrainE4))
+		return;
+
+	this->m_terrainE4 = terrainE4;
+	emit terrainE4Changed(this->m_terrainE4);
+}
+
+void Values::setTerrainExp(qreal terrainExp)
+{
+
+	if (qFuzzyCompare(this->m_terrainExp, terrainExp))
+		return;
+
+	this->m_terrainExp = terrainExp;
+	emit terrainExpChanged(this->m_terrainExp);
+}
+
+void Values::setTerrainSeed(int terrainSeed)
+{
+	if (this->m_terrainSeed == terrainSeed)
+		return;
+
+	this->m_terrainSeed = terrainSeed;
+	emit terrainSeedChanged(this->m_terrainSeed);
+}
+
+void Values::setTerrainHeightFactor(qreal terrainHeightFactor)
+{
+
+	if (qFuzzyCompare(this->m_terrainHeightFactor, terrainHeightFactor))
+		return;
+
+	this->m_terrainHeightFactor = terrainHeightFactor;
+	emit terrainHeightFactorChanged(this->m_terrainHeightFactor);
+}
+
 void Values::setRingAngleVariance(qreal ringAngleVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_ringAngleVariance, ringAngleVariance))
 		return;
 
@@ -293,7 +385,7 @@ qreal Values::ringRotationTimeVariance() const
 
 void Values::setRingBaseRotationTime(qreal ringBaseRotationTime)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_ringBaseRotationTime, ringBaseRotationTime))
 		return;
 
@@ -303,7 +395,7 @@ void Values::setRingBaseRotationTime(qreal ringBaseRotationTime)
 
 void Values::setRockBaseSize(qreal rockBaseSize)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_rockBaseSize, rockBaseSize))
 		return;
 
@@ -313,7 +405,7 @@ void Values::setRockBaseSize(qreal rockBaseSize)
 
 void Values::setRockSizeVariance(qreal rockSizeVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_rockSizeVariance, rockSizeVariance))
 		return;
 
@@ -323,7 +415,7 @@ void Values::setRockSizeVariance(qreal rockSizeVariance)
 
 void Values::setRockOrbitalDistanceVariance(qreal rockOrbitalDistanceVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_rockOrbitalDistanceVariance, rockOrbitalDistanceVariance))
 		return;
 
@@ -333,7 +425,7 @@ void Values::setRockOrbitalDistanceVariance(qreal rockOrbitalDistanceVariance)
 
 void Values::setRockHeightVariance(qreal rockHeightVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_rockHeightVariance, rockHeightVariance))
 		return;
 
@@ -343,7 +435,7 @@ void Values::setRockHeightVariance(qreal rockHeightVariance)
 
 void Values::setRockColorVariance(qreal rockColorVariance)
 {
-	qWarning("Floating point comparison needs context sanity check");
+
 	if (qFuzzyCompare(this->m_rockColorVariance, rockColorVariance))
 		return;
 
@@ -406,10 +498,44 @@ qreal Values::moonAngleVariance() const
 	return this->m_moonAngleVariance;
 }
 
-qreal Values::ringAngleVariance() const
+qreal Values::terrainE0() const
 {
-	return this->m_ringAngleVariance;
+	return this->m_terrainE0;
 }
 
+qreal Values::terrainE1() const
+{
+	return this->m_terrainE1;
+}
+
+qreal Values::terrainE2() const
+{
+	return this->m_terrainE2;
+}
+
+qreal Values::terrainE3() const
+{
+	return this->m_terrainE3;
+}
+
+qreal Values::terrainE4() const
+{
+	return this->m_terrainE4;
+}
+
+qreal Values::terrainExp() const
+{
+	return this->m_terrainExp;
+}
+
+qreal Values::terrainHeightFactor() const
+{
+	return this->m_terrainHeightFactor;
+}
+
+int Values::terrainSeed() const
+{
+	return this->m_terrainSeed;
+}
 
 }

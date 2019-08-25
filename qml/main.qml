@@ -61,10 +61,14 @@ Window {
 
         Slider {
             id: seedSlider
-            value: 289.0
+            value: Values.terrainSeed
             from: 0
             to: 1000
-            stepSize: 0.001
+            stepSize: 1
+
+            onValueChanged: {
+                Values.terrainSeed = value
+            }
         }
         Slider {
             id: scaleSlider
@@ -75,10 +79,14 @@ Window {
         }
         Slider {
             id: heightSlider
-            value: 1.5
-            from: 0
-            to: 4
+            value: Values.terrainHeightFactor
+            from: 0.01
+            to: 2
             stepSize: 0.01
+
+            onValueChanged: {
+                Values.terrainHeightFactor = value
+            }
         }
         Slider {
             id: coldnessSlider
@@ -86,18 +94,44 @@ Window {
             from: 0
             to: 1
             stepSize: 0.01
+
+            onValueChanged: {
+//                Values.terrainHeightFactor = value
+            }
         }
         Slider {
             id: e0Slider
-            value: 1.0
+            value: Values.terrainE0
+
+            onValueChanged: {
+                Values.terrainE0 = value
+            }
         }
         Slider {
             id: e1Slider
-            value: 0.5
+            value: Values.terrainE1
+
+            onValueChanged: {
+                Values.terrainE1 = value
+            }
         }
         Slider {
             id: e2Slider
-            value: 0.25
+            value: Values.terrainE2
+
+            onValueChanged: {
+                Values.terrainE2 = value
+            }
+        }
+        Slider {
+            id: expSlider
+            value: Values.terrainExp
+            from: 0.001
+            to: 4
+
+            onValueChanged: {
+                Values.terrainExp = value
+            }
         }
         Switch {
             id: heightMapSwitch

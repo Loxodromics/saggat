@@ -73,10 +73,7 @@ vec4 heightColor(float height) {
 }
 
 void main() {
-	float factor = 0.4;
-//	float eSum = (length(fragPos) - 1.0) * 4.0;
-	float eSum = (length(fragPos) - diameter) / (diameter * factor);
-//	eSum *= heightScale;
+	float eSum = (length(fragPos) - diameter) / (diameter * heightScale);
 	float coldnessVariation = abs(fragPos.y / diameter) * abs(fragPos.y / diameter) * coldness;
 
 	vec4 specColor = vec4(0.0, 0.0, 0.0, 1.0);
@@ -87,21 +84,20 @@ void main() {
 		outputColor = heightColor(eSum);
 	}
 	else {
-		outputColor = terrainColor(eSum);
-//		vec4 tcol = terrainColor(eSum + coldnessVariation);
-//		outputColor = vec4(tcol.xyz, 1.0);
-//		if ((tcol.w < 0.51) && (tcol.w > 0.49)) {
-//			specColor = vec4(outputColor.xyz, 1.0) * 1.8;
-//			specVal = 8.0 + 2.0 * eSum + cnoise(fragPos * planetScale * 32.0);
-//		}
-//		else if (tcol.w <= 0.2) {
-//			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
-//			specVal = 1.0 + eSum + cnoise(fragPos * planetScale * 8.0);
-//		}
-//		else {
-//			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
-//			specVal = 8.0 + 3.0 * cnoise(fragPos * planetScale * 32.0);
-//		}
+		vec4 tcol = terrainColor(eSum + coldnessVariation);
+		outputColor = vec4(tcol.xyz, 1.0);
+		if ((tcol.w < 0.51) && (tcol.w > 0.49)) {
+			specColor = vec4(outputColor.xyz, 1.0) * 1.8;
+			specVal = 8.0 + 2.0 * eSum + cnoise(fragPos * planetScale * 32.0);
+		}
+		else if (tcol.w <= 0.2) {
+			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
+			specVal = 1.0 + eSum + cnoise(fragPos * planetScale * 8.0);
+		}
+		else {
+			specColor = vec4(outputColor.xyz, 1.0) * 0.5;
+			specVal = 8.0 + 3.0 * cnoise(fragPos * planetScale * 32.0);
+		}
 	}
 
 	vec3 tNormal = worldTangent.xyz;
@@ -110,7 +106,7 @@ void main() {
 	vec3 wNormal = normalize(invertTangentMatrix * tNormal);
 	vec3 worldView = normalize(eyePosition - worldPosition);
 
-//	outputColor = phongFunction(outputColor * 0.2, outputColor, specColor, specVal, worldPosition, worldView, worldNormal);
+	outputColor = phongFunction(outputColor * 0.2, outputColor, specColor, specVal, worldPosition, worldView, worldNormal);
 
 	fragColor = vec4(outputColor.xyz, 1.0);
 }

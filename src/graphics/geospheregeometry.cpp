@@ -19,6 +19,8 @@
 #include <limits>
 #include <stdlib.h>
 
+#include "src/common/values.h"
+
 using Index = uint64_t;
 using Triangle = std::array<Index, 3>;
 using TriangleList = std::vector<Triangle>;
@@ -123,8 +125,10 @@ QByteArray createGeosphereMeshVertexData(VertexList vertices, float radius, QSha
 		float elevation = 1.0f;
 		if (!elevationProvider.isNull())
 		{
-			elevation = static_cast<float>(elevationProvider->elevationAt(vertex.x(), vertex.y(), vertex.z()));
-			elevation *= 0.4f;
+			elevation = static_cast<float>(elevationProvider->elevationAt(static_cast<double>(vertex.x()),
+																		  static_cast<double>(vertex.y()),
+																		  static_cast<double>(vertex.z())));
+			elevation *= static_cast<float>(Saggat::Values::getInstance().terrainHeightFactor());
 			elevation += 1.0f;
 		}
 		*fptr++ = vertex.x() * radius * elevation;
@@ -175,7 +179,9 @@ public:
 	{
 		const GeosphereVertexDataFunctor* otherFunctor = functor_cast<GeosphereVertexDataFunctor>(&other);
 		if (otherFunctor != nullptr)
-			return (otherFunctor->m_vertices == this->m_vertices && qFuzzyCompare(otherFunctor->m_radius, this->m_radius));
+			return (otherFunctor->m_vertices == this->m_vertices &&
+					qFuzzyCompare(otherFunctor->m_radius, this->m_radius) &&
+					otherFunctor->m_elevationProvider.get() == this->m_elevationProvider.get());
 		return false;
 	}
 
@@ -217,7 +223,7 @@ GeosphereGeometry::GeosphereGeometry(Qt3DCore::QNode* parent)
 	, m_normalAttribute(nullptr)
 	, m_vertexBuffer(nullptr)
 	, m_indexBuffer(nullptr)
-	, m_elevationProvider(QSharedPointer<PerlinNoiseElevationProvider>::create(1))
+	, m_elevationProvider(QSharedPointer<Saggat::PerlinNoiseElevationProvider>::create(Saggat::Values::getInstance().terrainSeed()))
 {
 	this->init();
 }
