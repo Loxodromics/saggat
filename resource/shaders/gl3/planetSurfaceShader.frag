@@ -23,6 +23,7 @@ out vec4 fragColor;
 #pragma include phong.inc.frag
 #pragma include coordinatesystems.inc
 #pragma include :/shaders/common/perlinnoise.inc
+#pragma include :/shaders/common/biomecolors.inc
 
 vec4 terrainColor(float height) {
 	if (height < 0.1) {
@@ -84,7 +85,7 @@ void main() {
 		outputColor = heightColor(eSum);
 	}
 	else {
-		vec4 tcol = terrainColor(eSum + coldnessVariation);
+		vec4 tcol = biome(eSum + coldnessVariation, 0.5);
 		outputColor = vec4(tcol.xyz, 1.0);
 		if ((tcol.w < 0.51) && (tcol.w > 0.49)) {
 			specColor = vec4(outputColor.xyz, 1.0) * 1.8;
