@@ -16,7 +16,7 @@ namespace Saggat {
 
 class SimplexNoiseElevationProvider : public ElevationProvider {
 public:
-	explicit SimplexNoiseElevationProvider(unsigned int octaves);
+	explicit SimplexNoiseElevationProvider(unsigned int seed, unsigned int octaves);
 
 	virtual double elevationAt(const double x, const double y, const double z) override;
 

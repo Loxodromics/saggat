@@ -9,10 +9,9 @@
 #include <QDebug>
 
 namespace Saggat {
-SimplexNoiseElevationProvider::SimplexNoiseElevationProvider(unsigned int octaves)
-	: m_simplexElevation(1.0, 1.0)
+SimplexNoiseElevationProvider::SimplexNoiseElevationProvider(unsigned int seed, unsigned int octaves)
+	: m_simplexElevation(seed)
 	, m_octaves(octaves)
-
 {
 
 }
@@ -22,7 +21,7 @@ double SimplexNoiseElevationProvider::elevationAt(const double x, const double y
 	double newX = this->avoidZero(x);
 	double newY = this->avoidZero(y);
 	double newZ = this->avoidZero(z);
-	/// magic numbers to get the a range that is _roughly_ [0, 1];
+	/// magic numbers to get the a range that is _roughly_ [0, 1], that's good enough
 	double elevation = this->m_simplexElevation.fractal(this->m_octaves, newX, newY, newZ) / 1.3 + 0.45;
 
 //	if (elevation > m_max) {

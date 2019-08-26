@@ -217,6 +217,8 @@ private:
 	TriangleList m_triangles;
 };
 
+static int octaves = 3;
+
 GeosphereGeometry::GeosphereGeometry(Qt3DCore::QNode* parent)
 	: Qt3DRender::QGeometry(parent)
 	, m_positionAttribute(nullptr)
@@ -224,7 +226,7 @@ GeosphereGeometry::GeosphereGeometry(Qt3DCore::QNode* parent)
 	, m_normalAttribute(nullptr)
 	, m_vertexBuffer(nullptr)
 	, m_indexBuffer(nullptr)
-	, m_elevationProvider(QSharedPointer<Saggat::SimplexNoiseElevationProvider>::create(5))
+	, m_elevationProvider(QSharedPointer<Saggat::SimplexNoiseElevationProvider>::create(Saggat::Values::getInstance().terrainSeed(), octaves))
 {
 	this->init();
 }
@@ -310,7 +312,7 @@ void GeosphereGeometry::init()
 void GeosphereGeometry::update()
 {
 	///FIXME: this is currently needed to regenerate geometry
-	this->m_elevationProvider = QSharedPointer<Saggat::SimplexNoiseElevationProvider>::create(5);
+	this->m_elevationProvider = QSharedPointer<Saggat::SimplexNoiseElevationProvider>::create(Saggat::Values::getInstance().terrainSeed(), octaves);
 
 	auto verticesTriangles = makeGeoSphere(this->m_subdivisions);
 
