@@ -11,5 +11,7 @@
         <file>qml/PlanetSurfaceMaterialQml.qml</file>
         <file>qml/Sun.qml</file>
         <file>qml/MoonSurfaceMaterialQml.qml</file>
+        <file>qml/PerlinControls.qml</file>
+        <file>qml/SimplexControls.qml</file>
     </qresource>
 </RCC>

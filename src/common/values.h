@@ -65,6 +65,10 @@ public:
 	Q_PROPERTY(qreal terrainExp READ terrainExp WRITE setTerrainExp NOTIFY terrainExpChanged)
 	Q_PROPERTY(qreal terrainHeightFactor READ terrainHeightFactor WRITE setTerrainHeightFactor NOTIFY terrainHeightFactorChanged)
 	Q_PROPERTY(int terrainSeed READ terrainSeed WRITE setTerrainSeed NOTIFY terrainSeedChanged)
+	Q_PROPERTY(qreal terrainPlanetScale READ terrainPlanetScale WRITE setTerrainPlanetScale NOTIFY terrainPlanetScaleChanged)
+	Q_PROPERTY(qreal terrainColdness READ terrainColdness WRITE setTerrainColdness NOTIFY terrainColdnessChanged)
+	Q_PROPERTY(bool displayHeight READ displayHeight WRITE setDisplayHeight NOTIFY displayHeightChanged)
+	Q_PROPERTY(int terrainOctaves READ terrainOctaves WRITE setTerrainOctaves NOTIFY terrainOctavesChanged)
 
 	qreal planetBaseRadius() const;
 	qreal planetRadiusVariance() const;
@@ -95,7 +99,6 @@ public:
 	qreal moonCountToPlanetSizeFactor() const;
 	qreal moonAngleVariance() const;
 
-
 	qreal terrainE0() const;
 	qreal terrainE1() const;
 	qreal terrainE2() const;
@@ -104,7 +107,10 @@ public:
 	qreal terrainExp() const;
 	qreal terrainHeightFactor() const;
 	int terrainSeed() const;
-
+	qreal terrainPlanetScale() const;
+	bool displayHeight() const;
+	int terrainOctaves() const;
+	qreal terrainColdness() const;
 
 public slots:
 	void setPlanetBaseRadius(qreal planetBaseRadius);
@@ -144,7 +150,10 @@ public slots:
 	void setTerrainExp(qreal terrainExp);
 	void setTerrainHeightFactor(qreal terrainHeightFactor);
 	void setTerrainSeed(int terrainSeed);
-
+	void setTerrainPlanetScale(qreal terrainPlanetScale);
+	void setDisplayHeight(bool displayHeight);
+	void setTerrainOctaves(int terrainOctaves);
+	void setTerrainColdness(qreal terrainColdness);
 
 signals:
 	void planetBaseRadiusChanged(qreal planetBaseRadius);
@@ -184,7 +193,11 @@ signals:
 	void terrainExpChanged(qreal terrainExp);
 	void terrainHeightFactorChanged(qreal terrainHeightFactor);
 	void terrainSeedChanged(int terrainSeed);
-
+	void terrainPlanetScaleChanged(qreal terrainPlanetScale);
+	void coldnessChanged(qreal coldness);
+	void displayHeightChanged(bool displayHeight);
+	void terrainOctavesChanged(int terrainOctaves);
+	void terrainColdnessChanged(qreal terrainColdness);
 
 protected:
 	qreal m_planetBaseRadius;
@@ -224,11 +237,16 @@ protected:
 	qreal m_terrainExp;
 	qreal m_terrainHeightFactor;
 	int   m_terrainSeed;
+	qreal m_terrainPlanetScale;
+	bool  m_displayHeight;
+	int   m_terrainOctaves;
+	qreal m_terrainColdness;
 
 private:
 	explicit Values(QObject *parent = nullptr);
 	Values(Values const&);
 	void operator =(Values const&);
+
 };
 
 }

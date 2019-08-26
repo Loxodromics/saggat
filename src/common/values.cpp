@@ -43,7 +43,11 @@ Values::Values(QObject *parent)
 	  m_terrainE4(0.0625),
 	  m_terrainExp(1.0),
 	  m_terrainHeightFactor(0.3),
-	  m_terrainSeed(186)
+	  m_terrainSeed(186),
+	  m_terrainPlanetScale(1.0),
+	  m_displayHeight(false),
+	  m_terrainOctaves(4),
+	  m_terrainColdness(1.0)
 {
 
 }
@@ -344,6 +348,42 @@ void Values::setTerrainSeed(int terrainSeed)
 	emit terrainSeedChanged(this->m_terrainSeed);
 }
 
+void Values::setTerrainPlanetScale(qreal terrainPlanetScale)
+{
+	if (qFuzzyCompare(this->m_terrainPlanetScale, terrainPlanetScale))
+		return;
+
+	this->m_terrainPlanetScale = terrainPlanetScale;
+	emit terrainPlanetScaleChanged(this->m_terrainPlanetScale);
+}
+
+void Values::setDisplayHeight(bool displayHeight)
+{
+	if (this->m_displayHeight == displayHeight)
+		return;
+
+	this->m_displayHeight = displayHeight;
+	emit displayHeightChanged(this->m_displayHeight);
+}
+
+void Values::setTerrainOctaves(int terrainOctaves)
+{
+	if (this->m_terrainOctaves == terrainOctaves)
+		return;
+
+	this->m_terrainOctaves = terrainOctaves;
+	emit terrainOctavesChanged(this->m_terrainOctaves);
+}
+
+void Values::setTerrainColdness(qreal terrainColdness)
+{
+	if (qFuzzyCompare(this->m_terrainColdness, terrainColdness))
+		return;
+
+	this->m_terrainColdness = terrainColdness;
+	emit terrainColdnessChanged(this->m_terrainColdness);
+}
+
 void Values::setTerrainHeightFactor(qreal terrainHeightFactor)
 {
 
@@ -536,6 +576,26 @@ qreal Values::terrainHeightFactor() const
 int Values::terrainSeed() const
 {
 	return this->m_terrainSeed;
+}
+
+qreal Values::terrainPlanetScale() const
+{
+	return this->m_terrainPlanetScale;
+}
+
+bool Values::displayHeight() const
+{
+	return this->m_displayHeight;
+}
+
+int Values::terrainOctaves() const
+{
+	return this->m_terrainOctaves;
+}
+
+qreal Values::terrainColdness() const
+{
+	return this->m_terrainColdness;
 }
 
 }

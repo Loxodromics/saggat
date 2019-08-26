@@ -1,20 +1,19 @@
-import Qt3D.Core 2.0
-import Qt3D.Render 2.0
+import Qt3D.Core 2.12
+import Qt3D.Render 2.12
 import Saggat 1.0
-
 
 PlanetSurfaceMaterial {
     id: root
 
     property real diameter: 1.0
-    property real planetScale: scaleSlider.value
-    property real heightScale: heightSlider.value
-    property real e0: e0Slider.value
-    property real e1: e1Slider.value
-    property real e2: e2Slider.value
-    property real coldness: coldnessSlider.value
-    property real seed: seedSlider.value
-    property bool displayHeight: heightMapSwitch.position
+    property real planetScale: Values.terrainPlanetScale
+    property real heightScale: Values.terrainHeightFactor
+    property real e0: Values.terrainE0
+    property real e1: Values.terrainE1
+    property real e2: Values.terrainE2
+    property real coldness: Values.terrainColdness
+    property int seed: Values.terrainSeed
+    property bool displayHeight: Values.displayHeight
 
     property color maincolor: Qt.rgba(0.0, 0.0, 0.0, 1.0)
     property Sun sun
@@ -22,27 +21,27 @@ PlanetSurfaceMaterial {
     parameters: [
         Parameter {
             name: "planetScale"
-            value: root.planetScale
+            value: Values.terrainPlanetScale
         },
         Parameter {
             name: "heightScale"
-            value: root.heightScale
+            value: Values.terrainHeightFactor
         },
         Parameter {
             name: "e0"
-            value: root.e0
+            value: Values.terrainE0
         },
         Parameter {
             name: "e1"
-            value: root.e1
+            value: Values.terrainE1
         },
         Parameter {
             name: "e2"
-            value: root.e2
+            value: Values.terrainE2
         },
         Parameter {
             name: "displayHeight"
-            value: root.displayHeight
+            value: Values.terrainDisplayHeight
         },
         Parameter {
             name: "diameter"
@@ -50,11 +49,11 @@ PlanetSurfaceMaterial {
         },
         Parameter {
             name: "coldness"
-            value: root.coldness
+            value: Values.terrainColdness
         },
         Parameter {
             name: "seed"
-            value: root.seed
+            value: Values.terrainSeed
         }
     ]
 }
