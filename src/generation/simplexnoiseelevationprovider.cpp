@@ -6,6 +6,9 @@
 //  Copyright (c) 2019 Philipp Engelhard. All rights reserved.
 //
 #include "simplexnoiseelevationprovider.h"
+#include "src/common/values.h"
+
+#include <cmath>
 #include <QDebug>
 
 namespace Saggat {
@@ -24,15 +27,21 @@ double SimplexNoiseElevationProvider::elevationAt(const double x, const double y
 	/// magic numbers to get the a range that is _roughly_ [0, 1], that's good enough
 	double elevation = this->m_simplexElevation.fractal(this->m_octaves, newX, newY, newZ) / 1.3 + 0.45;
 
-//	if (elevation > m_max) {
-//		m_max = elevation;
-//		qDebug() << "min: " << m_min << "max: " << m_max;
-//	}
+	elevation = pow(elevation, Values::getInstance().terrainExp());
 
-//	if (elevation < m_min) {
-//		m_min = elevation;
-//		qDebug() << "min: " << m_min << "max: " << m_max;
-//	}
+	/// sea level cut off
+	if (elevation < 0.09 + static_cast<float>(Values::getInstance().terrainSeaLevelFactor()))
+		elevation = 0.09 + static_cast<float>(Values::getInstance().terrainSeaLevelFactor());
+
+	if (elevation > m_max) {
+		m_max = elevation;
+		qDebug() << "min: " << m_min << "max: " << m_max;
+	}
+
+	if (elevation < m_min) {
+		m_min = elevation;
+		qDebug() << "min: " << m_min << "max: " << m_max;
+	}
 
 	return elevation;
 }
@@ -43,7 +52,6 @@ double SimplexNoiseElevationProvider::avoidZero(const double value)
 		return 0.0002;
 	else
 		return value;
-
 }
 
 } /// namespace Saggat

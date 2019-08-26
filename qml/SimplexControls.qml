@@ -71,6 +71,17 @@ ColumnLayout {
             Values.terrainExp = value
         }
     }
+    Slider {
+        id: seaLevelFactorSlider
+        value: Values.terrainSeaLevelFactor
+        from: 0
+        to: 0.3
+        stepSize: 0.01
+
+        onValueChanged: {
+            Values.terrainSeaLevelFactor = value
+        }
+    }
     Switch {
         id: heightMapSwitch
     }

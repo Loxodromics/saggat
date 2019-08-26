@@ -42,12 +42,13 @@ Values::Values(QObject *parent)
 	  m_terrainE3(0.125),
 	  m_terrainE4(0.0625),
 	  m_terrainExp(1.0),
-	  m_terrainHeightFactor(0.3),
+	  m_terrainHeightFactor(0.2),
 	  m_terrainSeed(186),
 	  m_terrainPlanetScale(1.0),
 	  m_displayHeight(false),
 	  m_terrainOctaves(4),
-	  m_terrainColdness(1.0)
+	  m_terrainColdness(1.0),
+	  m_terrainSeaLevelFactor(0.1)
 {
 
 }
@@ -384,6 +385,15 @@ void Values::setTerrainColdness(qreal terrainColdness)
 	emit terrainColdnessChanged(this->m_terrainColdness);
 }
 
+void Values::setTerrainSeaLevelFactor(qreal terrainSeaLevelFactor)
+{
+	if (qFuzzyCompare(this->m_terrainSeaLevelFactor, terrainSeaLevelFactor))
+		return;
+
+	this->m_terrainSeaLevelFactor = terrainSeaLevelFactor;
+	emit terrainSeaLevelFactorChanged(this->m_terrainSeaLevelFactor);
+}
+
 void Values::setTerrainHeightFactor(qreal terrainHeightFactor)
 {
 
@@ -596,6 +606,11 @@ int Values::terrainOctaves() const
 qreal Values::terrainColdness() const
 {
 	return this->m_terrainColdness;
+}
+
+qreal Values::terrainSeaLevelFactor() const
+{
+	return this->m_terrainSeaLevelFactor;
 }
 
 }

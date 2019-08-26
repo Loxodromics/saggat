@@ -130,7 +130,7 @@ QByteArray createGeosphereMeshVertexData(VertexList vertices, float radius, QSha
 																		  static_cast<double>(vertex.y()),
 																		  static_cast<double>(vertex.z())));
 			elevation *= static_cast<float>(Saggat::Values::getInstance().terrainHeightFactor());
-			elevation += 1.0f;
+			elevation += 1.0f - static_cast<float>(Saggat::Values::getInstance().terrainSeaLevelFactor());
 		}
 		*fptr++ = vertex.x() * radius * elevation;
 		*fptr++ = vertex.y() * radius * elevation;
