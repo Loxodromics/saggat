@@ -1,48 +1,43 @@
-import Qt3D.Core 2.0
-import Qt3D.Render 2.0
+import Qt3D.Core 2.12
+import Qt3D.Render 2.12
 import Saggat 1.0
-
 
 PlanetSurfaceMaterial {
     id: root
 
     property real diameter: 1.0
-    property real planetScale: scaleSlider.value
-    property real heightScale: heightSlider.value
-    property real e0: e0Slider.value
-    property real e1: e1Slider.value
-    property real e2: e2Slider.value
-    property real coldness: coldnessSlider.value
-    property real seed: seedSlider.value
-    property bool displayHeight: heightMapSwitch.position
 
     property color maincolor: Qt.rgba(0.0, 0.0, 0.0, 1.0)
     property Sun sun
 
+    QmlValues {
+        id: values
+    }
+
     parameters: [
         Parameter {
             name: "planetScale"
-            value: root.planetScale
+            value: values.terrainPlanetScale
         },
         Parameter {
             name: "heightScale"
-            value: root.heightScale
+            value: values.terrainHeightFactor
         },
         Parameter {
             name: "e0"
-            value: root.e0
+            value: values.terrainE0
         },
         Parameter {
             name: "e1"
-            value: root.e1
+            value: values.terrainE1
         },
         Parameter {
             name: "e2"
-            value: root.e2
+            value: values.terrainE2
         },
         Parameter {
             name: "displayHeight"
-            value: root.displayHeight
+            value: values.terrainDisplayHeight
         },
         Parameter {
             name: "diameter"
@@ -50,12 +45,17 @@ PlanetSurfaceMaterial {
         },
         Parameter {
             name: "coldness"
-            value: root.coldness
+            value: values.terrainColdness
         },
         Parameter {
             name: "seed"
-            value: root.seed
+            value: values.terrainSeed
+        },
+        Parameter {
+            name: "seaLevel"
+            value: values.terrainSeaLevel
         }
+
     ]
 }
 

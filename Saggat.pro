@@ -16,13 +16,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ../saggat/src/graphics/geospheregeometry.cpp \
-    ../saggat/src/graphics/geospheremesh.cpp \
         main.cpp \
+        src/common/qmlvalues.cpp \
         src/common/values.cpp \
+        src/generation/elevationprovider.cpp \
         src/generation/generator.cpp \
+        src/generation/perlinnoiseelevationprovider.cpp \
+        src/generation/simplexnoiseelevationprovider.cpp \
+        src/graphics/geospheregeometry.cpp \
+        src/graphics/geospheremesh.cpp \
+        src/graphics/moonsurfacematerial.cpp \
         src/graphics/planetsurfacematerial.cpp \
-    ../saggat/src/graphics/moonsurfacematerial.cpp
+        src/thirdparty/perlinnoise.cpp \
+        src/thirdparty/simplexnoise.cpp
 
 RESOURCES += qml.qrc \
     ../saggat/resource/textures.qrc \
@@ -40,9 +46,15 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    ../saggat/src/graphics/geospheregeometry.h \
-    ../saggat/src/graphics/geospheremesh.h \
+        src/common/qmlvalues.h \
         src/common/values.h \
+        src/generation/elevationprovider.h \
         src/generation/generator.h \
+        src/generation/perlinnoiseelevationprovider.h \
+        src/generation/simplexnoiseelevationprovider.h \
+        src/graphics/geospheregeometry.h \
+        src/graphics/geospheremesh.h \
+        src/graphics/moonsurfacematerial.h \
         src/graphics/planetsurfacematerial.h \
-    ../saggat/src/graphics/moonsurfacematerial.h
+        src/thirdparty/perlinnoise.h \
+        src/thirdparty/simplexnoise.h

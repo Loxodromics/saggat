@@ -6,6 +6,9 @@
 //  Copyright (c) 2019 Philipp Engelhard. All rights reserved.
 //
 #include "geospheregeometry.h"
+#include "src/generation/perlinnoiseelevationprovider.h"
+#include "src/generation/simplexnoiseelevationprovider.h"
+
 #include <QVector3D>
 #include <Qt3DRender/QAttribute>
 #include <Qt3DRender/QBufferDataGenerator>
@@ -16,6 +19,8 @@
 #include <array>
 #include <limits>
 #include <stdlib.h>
+
+#include "src/common/values.h"
 
 using Index = uint64_t;
 using Triangle = std::array<Index, 3>;
@@ -106,7 +111,7 @@ IndexedMesh makeGeoSphere(unsigned int subdivisions)
 	return { vertices, triangles };
 }
 
-QByteArray createGeosphereMeshVertexData(VertexList vertices, float radius)
+QByteArray createGeosphereMeshVertexData(VertexList vertices, float radius, QSharedPointer<ElevationProvider> elevationProvider)
 {
 	QByteArray bufferBytes;
 	/// vec3 pos and vec3 normal
@@ -118,9 +123,18 @@ QByteArray createGeosphereMeshVertexData(VertexList vertices, float radius)
 	float* fptr = reinterpret_cast<float*>(bufferBytes.data());
 
 	for (auto vertex : vertices) {
-		*fptr++ = vertex.x() * radius;
-		*fptr++ = vertex.y() * radius;
-		*fptr++ = vertex.z() * radius;
+		float elevation = 1.0f;
+		if (!elevationProvider.isNull())
+		{
+			elevation = static_cast<float>(elevationProvider->elevationAt(static_cast<double>(vertex.x()),
+																		  static_cast<double>(vertex.y()),
+																		  static_cast<double>(vertex.z())));
+			elevation *= static_cast<float>(Saggat::Values::getInstance().terrainHeightFactor());
+			elevation += 1.0f;
+		}
+		*fptr++ = vertex.x() * radius * elevation;
+		*fptr++ = vertex.y() * radius * elevation;
+		*fptr++ = vertex.z() * radius * elevation;
 
 		auto normal = vertex.normalized();
 		*fptr++ = normal.x();
@@ -153,19 +167,22 @@ QByteArray createGeosphereMeshIndexData(TriangleList triangles)
 
 class GeosphereVertexDataFunctor : public Qt3DRender::QBufferDataGenerator {
 public:
-	GeosphereVertexDataFunctor(VertexList vertices, float radius)
+	GeosphereVertexDataFunctor(VertexList vertices, float radius, QSharedPointer<ElevationProvider> elevationProvider)
 		: m_vertices(vertices)
 		, m_radius(radius)
+		, m_elevationProvider(elevationProvider)
 	{
 	}
 
-	QByteArray operator()() override { return createGeosphereMeshVertexData(this->m_vertices, this->m_radius); }
+	QByteArray operator()() override { return createGeosphereMeshVertexData(this->m_vertices, this->m_radius, this->m_elevationProvider); }
 
 	bool operator==(const QBufferDataGenerator& other) const override
 	{
 		const GeosphereVertexDataFunctor* otherFunctor = functor_cast<GeosphereVertexDataFunctor>(&other);
 		if (otherFunctor != nullptr)
-			return (otherFunctor->m_vertices == this->m_vertices && qFuzzyCompare(otherFunctor->m_radius, this->m_radius));
+			return (otherFunctor->m_vertices == this->m_vertices &&
+					qFuzzyCompare(otherFunctor->m_radius, this->m_radius) &&
+					otherFunctor->m_elevationProvider.get() == this->m_elevationProvider.get());
 		return false;
 	}
 
@@ -174,6 +191,7 @@ public:
 private:
 	VertexList m_vertices;
 	float m_radius;
+	QSharedPointer<ElevationProvider> m_elevationProvider;
 };
 
 class GeosphereIndexDataFunctor : public QBufferDataGenerator {
@@ -206,6 +224,7 @@ GeosphereGeometry::GeosphereGeometry(Qt3DCore::QNode* parent)
 	, m_normalAttribute(nullptr)
 	, m_vertexBuffer(nullptr)
 	, m_indexBuffer(nullptr)
+	, m_elevationProvider(QSharedPointer<Saggat::SimplexNoiseElevationProvider>::create(Saggat::Values::getInstance().terrainSeed(), Saggat::Values::getInstance().terrainOctaves()))
 {
 	this->init();
 }
@@ -280,7 +299,7 @@ void GeosphereGeometry::init()
 	this->m_indexAttribute->setCount(nVerts);
 
 	this->m_vertexBuffer->setDataGenerator(
-	  QSharedPointer<GeosphereVertexDataFunctor>::create(verticesTriangles.first, this->m_radius));
+	  QSharedPointer<GeosphereVertexDataFunctor>::create(verticesTriangles.first, this->m_radius, this->m_elevationProvider));
 	this->m_indexBuffer->setDataGenerator(QSharedPointer<GeosphereIndexDataFunctor>::create(verticesTriangles.second));
 
 	this->addAttribute(this->m_positionAttribute);
@@ -290,6 +309,9 @@ void GeosphereGeometry::init()
 
 void GeosphereGeometry::update()
 {
+	///FIXME: this is currently needed to regenerate geometry
+	this->m_elevationProvider = QSharedPointer<Saggat::SimplexNoiseElevationProvider>::create(Saggat::Values::getInstance().terrainSeed(), Saggat::Values::getInstance().terrainOctaves());
+
 	auto verticesTriangles = makeGeoSphere(this->m_subdivisions);
 
 	const uint nVerts = static_cast<uint>(verticesTriangles.second.size() * 3);
@@ -297,6 +319,16 @@ void GeosphereGeometry::update()
 	this->m_normalAttribute->setCount(nVerts);
 	this->m_indexAttribute->setCount(nVerts);
 	this->m_vertexBuffer->setDataGenerator(
-	  QSharedPointer<GeosphereVertexDataFunctor>::create(verticesTriangles.first, this->m_radius));
+	  QSharedPointer<GeosphereVertexDataFunctor>::create(verticesTriangles.first, this->m_radius, this->m_elevationProvider));
 	this->m_indexBuffer->setDataGenerator(QSharedPointer<GeosphereIndexDataFunctor>::create(verticesTriangles.second));
+}
+
+QSharedPointer<ElevationProvider> GeosphereGeometry::elevationProvider() const
+{
+	return m_elevationProvider;
+}
+
+void GeosphereGeometry::setElevationProvider(const QSharedPointer<ElevationProvider>& elevationProvider)
+{
+	m_elevationProvider = elevationProvider;
 }

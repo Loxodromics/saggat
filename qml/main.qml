@@ -48,59 +48,17 @@ Window {
 
         hoverEnabled: true
 
-        anchors.top: sliderLayout.top
-        anchors.bottom: sliderLayout.bottom
-        anchors.left: sliderLayout.left
-        anchors.right: sliderLayout.right
+        anchors.top: terrainControls.top
+        anchors.bottom: terrainControls.bottom
+        anchors.left: terrainControls.left
+        anchors.right: terrainControls.right
     }
 
-    ColumnLayout {
-        id: sliderLayout
+//    PerlinControls {
+//        id: terrainControls
+//    }
 
-        visible: sliderHider.containsMouse
-
-        Slider {
-            id: seedSlider
-            value: 289.0
-            from: 0
-            to: 1000
-            stepSize: 0.001
-        }
-        Slider {
-            id: scaleSlider
-            value: 0.08
-            from: 0
-            to: 1
-            stepSize: 0.001
-        }
-        Slider {
-            id: heightSlider
-            value: 1.5
-            from: 0
-            to: 4
-            stepSize: 0.01
-        }
-        Slider {
-            id: coldnessSlider
-            value: 0.5
-            from: 0
-            to: 1
-            stepSize: 0.01
-        }
-        Slider {
-            id: e0Slider
-            value: 1.0
-        }
-        Slider {
-            id: e1Slider
-            value: 0.5
-        }
-        Slider {
-            id: e2Slider
-            value: 0.25
-        }
-        Switch {
-            id: heightMapSwitch
-        }
+    SimplexControls {
+        id: terrainControls
     }
 }

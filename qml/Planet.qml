@@ -27,7 +27,7 @@ Entity {
 
     PlanetSurfaceMaterialQml {
         id: planetMaterial
-        diameter: radius
+        diameter: root.radius
         sun: sun
     }
 
@@ -52,7 +52,7 @@ Entity {
         id: planetMesh
 
         radius: root.radius
-        subdivisions: 3
+        subdivisions: 6
     }
 
     Transform {
