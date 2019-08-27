@@ -16,6 +16,7 @@ uniform float e2;
 uniform float coldness;
 uniform float seed;
 uniform bool displayHeight;
+uniform float seaLevel;
 uniform vec3 eyePosition;
 
 out vec4 fragColor;
@@ -75,7 +76,8 @@ vec4 heightColor(float height) {
 
 void main() {
 	float eSum = (length(fragPos) - diameter) / (diameter * heightScale);
-	float coldnessVariation = abs(fragPos.y / diameter) * abs(fragPos.y / diameter) * coldness;
+	/// not in use right now
+	float coldnessVariation = 0.0; //abs(fragPos.y / diameter) * abs(fragPos.y / diameter) * coldness;
 
 	float moistureSum = 1.0 * cnoise(fragPos * planetScale * 0.15);
 	moistureSum += 0.5 * cnoise(fragPos * planetScale * 2.0);
@@ -88,10 +90,10 @@ void main() {
 	float specVal = 0.0;
 	if (displayHeight) {
 		outputColor = vec4(eSum, eSum, eSum, 1.0);
-		outputColor = heightColor(moisture);
+		outputColor = heightColor(eSum);
 	}
 	else {
-		vec4 tcol = biome(eSum + coldnessVariation, moisture);
+		vec4 tcol = biome(eSum + coldnessVariation, moisture, seaLevel);
 		outputColor = vec4(tcol.xyz, 1.0);
 		if ((tcol.w < 0.51) && (tcol.w > 0.49)) {
 			specColor = vec4(outputColor.xyz, 1.0) * 1.8;

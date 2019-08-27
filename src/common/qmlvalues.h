@@ -20,7 +20,7 @@ class QmlValues : public QQuickItem
 public:
 	QmlValues();
 
-	Q_PROPERTY(qreal terrainSeaLevelFactor READ terrainSeaLevelFactor WRITE setTerrainSeaLevelFactor NOTIFY terrainSeaLevelFactorChanged)
+	Q_PROPERTY(qreal terrainSeaLevel READ terrainSeaLevel WRITE setTerrainSeaLevel NOTIFY terrainSeaLevelChanged)
 	Q_PROPERTY(bool terrainDisplayHeight READ terrainDisplayHeight WRITE setTerrainDisplayHeight NOTIFY terrainDisplayHeightChanged)
 	Q_PROPERTY(qreal terrainPlanetScale READ terrainPlanetScale WRITE setTerrainPlanetScale NOTIFY terrainPlanetScaleChanged)
 	Q_PROPERTY(qreal terrainHeightFactor READ terrainHeightFactor WRITE setTerrainHeightFactor NOTIFY terrainHeightFactorChanged)
@@ -30,9 +30,9 @@ public:
 	Q_PROPERTY(qreal terrainColdness READ terrainColdness WRITE setTerrainColdness NOTIFY terrainColdnessChanged)
 	Q_PROPERTY(int terrainSeed READ terrainSeed WRITE setTerrainSeed NOTIFY terrainSeedChanged)
 
-	qreal terrainSeaLevelFactor() const
+	qreal terrainSeaLevel() const
 	{
-		return Values::getInstance().terrainSeaLevelFactor();
+		return Values::getInstance().terrainSeaLevel();
 	}
 
 	bool terrainDisplayHeight() const
@@ -76,7 +76,7 @@ public:
 	}
 
 signals:
-	void terrainSeaLevelFactorChanged(qreal terrainSeaLevelFactor);
+	void terrainSeaLevelChanged(qreal terrainSeaLevel);
 	void terrainDisplayHeightChanged(bool terrainDisplayHeight);
 	void terrainPlanetScaleChanged(qreal terrainPlanetScale);
 	void terrainHeightFactorChanged(qreal terrainHeightFactor);
@@ -87,7 +87,7 @@ signals:
 	void terrainSeedChanged(int terrainSeed);
 
 public slots:
-	void setTerrainSeaLevelFactor(qreal terrainSeaLevelFactor);
+	void setTerrainSeaLevel(qreal terrainSeaLevel);
 	void setTerrainDisplayHeight(bool terrainDisplayHeight);
 	void setTerrainPlanetScale(qreal terrainPlanetScale);
 	void setTerrainHeightFactor(qreal terrainHeightFactor);

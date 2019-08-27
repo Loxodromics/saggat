@@ -69,7 +69,7 @@ public:
 	Q_PROPERTY(qreal terrainColdness READ terrainColdness WRITE setTerrainColdness NOTIFY terrainColdnessChanged)
 	Q_PROPERTY(bool displayHeight READ displayHeight WRITE setDisplayHeight NOTIFY displayHeightChanged)
 	Q_PROPERTY(int terrainOctaves READ terrainOctaves WRITE setTerrainOctaves NOTIFY terrainOctavesChanged)
-	Q_PROPERTY(qreal terrainSeaLevelFactor READ terrainSeaLevelFactor WRITE setTerrainSeaLevelFactor NOTIFY terrainSeaLevelFactorChanged)
+	Q_PROPERTY(qreal terrainSeaLevel READ terrainSeaLevel WRITE setTerrainSeaLevel NOTIFY terrainSeaLevelChanged)
 
 	qreal planetBaseRadius() const;
 	qreal planetRadiusVariance() const;
@@ -112,7 +112,7 @@ public:
 	bool displayHeight() const;
 	int terrainOctaves() const;
 	qreal terrainColdness() const;
-	qreal terrainSeaLevelFactor() const;
+	qreal terrainSeaLevel() const;
 
 public slots:
 	void setPlanetBaseRadius(qreal planetBaseRadius);
@@ -156,7 +156,7 @@ public slots:
 	void setDisplayHeight(bool displayHeight);
 	void setTerrainOctaves(int terrainOctaves);
 	void setTerrainColdness(qreal terrainColdness);
-	void setTerrainSeaLevelFactor(qreal terrainSeaLevelFactor);
+	void setTerrainSeaLevel(qreal terrainSeaLevel);
 
 signals:
 	void planetBaseRadiusChanged(qreal planetBaseRadius);
@@ -201,7 +201,7 @@ signals:
 	void displayHeightChanged(bool displayHeight);
 	void terrainOctavesChanged(int terrainOctaves);
 	void terrainColdnessChanged(qreal terrainColdness);
-	void terrainSeaLevelFactorChanged(qreal terrainSeaLevelFactor);
+	void terrainSeaLevelChanged(qreal terrainSeaLevel);
 
 protected:
 	qreal m_planetBaseRadius;
@@ -245,7 +245,7 @@ protected:
 	bool  m_displayHeight;
 	int   m_terrainOctaves;
 	qreal m_terrainColdness;
-	qreal m_terrainSeaLevelFactor;
+	qreal m_terrainSeaLevel;
 
 private:
 	explicit Values(QObject *parent = nullptr);

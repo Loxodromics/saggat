@@ -20,13 +20,18 @@ ColumnLayout {
             Values.terrainSeed = value
         }
     }
-    Slider {
-        id: scaleSlider
-        value: 0.08
-        from: 0
-        to: 1
-        stepSize: 0.001
-    }
+//    Slider {
+//        id: scaleSlider
+//        value: 0.08
+//        from: 0
+//        to: 1
+//        stepSize: 0.001
+
+
+//        onValueChanged: {
+//            Values.terrainScale = value
+//        }
+//    }
     Slider {
         id: heightSlider
         value: Values.terrainHeightFactor
@@ -46,7 +51,7 @@ ColumnLayout {
         stepSize: 0.01
 
         onValueChanged: {
-//                Values.terrainHeightFactor = value
+                Values.terrainColdness = value
         }
     }
     Slider {
@@ -61,29 +66,33 @@ ColumnLayout {
             Values.terrainOctaves = value
         }
     }
-    Slider {
-        id: expSlider
-        value: Values.terrainExp
-        from: 0.001
-        to: 4
+//    Slider {
+//        id: expSlider
+//        value: Values.terrainExp
+//        from: 0.001
+//        to: 4
 
-        onValueChanged: {
-            Values.terrainExp = value
-        }
-    }
+//        onValueChanged: {
+//            Values.terrainExp = value
+//        }
+//    }
     Slider {
-        id: seaLevelFactorSlider
-        value: Values.terrainSeaLevelFactor
+        id: seaLevelSlider
+        value: Values.terrainSeaLevel
         from: 0
-        to: 0.3
+        to: 0.99
         stepSize: 0.01
 
         onValueChanged: {
-            Values.terrainSeaLevelFactor = value
+            Values.terrainSeaLevel = value
         }
     }
     Switch {
         id: heightMapSwitch
+
+        onPositionChanged: {
+            Values.displayHeight = position
+        }
     }
 }
 

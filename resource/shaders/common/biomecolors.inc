@@ -1,4 +1,4 @@
-vec4 biome(float e, float m)
+vec4 biome(float e, float m, float seaLevel)
 {
 
     vec4 OCEAN = vec4( 0.265625 , 0.269531 , 0.46875 , 0.8);
@@ -17,23 +17,24 @@ vec4 biome(float e, float m)
 	vec4 TROPICAL_SEASONAL_FOREST = vec4( 0.339844 , 0.59375 , 0.28125 , 0.1);
 	vec4 TROPICAL_RAIN_FOREST = vec4( 0.210938 , 0.460938 , 0.335938 , 0.1);
 
-    if (e < 0.1) return OCEAN;
-	if (e < 0.12) return BEACH;
+/// + 0.02 to avoid ugly polygone outlines at the ocean
+    if (e < 0.02 + seaLevel) return OCEAN;
+	if (e < 0.02 + seaLevel + 0.02) return BEACH;
 
-    if (e > 0.8) {
+    if (e > 0.8 * (1.0 / seaLevel)) {
 	    if (m < 0.1) return SCORCHED;
 		if (m < 0.2) return BARE;
 		if (m < 0.5) return TUNDRA;
 		return SNOW;
 	}
 
-    if (e > 0.6) {
+    if (e > 0.6 * (1.0 / seaLevel)) {
 	    if (m < 0.33) return TEMPERATE_DESERT;
 		if (m < 0.66) return SHRUBLAND;
 		return TAIGA;
 	}
 
-    if (e > 0.3) {
+    if (e > 0.3 * (1.0 / seaLevel)) {
 	    if (m < 0.16) return TEMPERATE_DESERT;
 		if (m < 0.50) return GRASSLAND;
 		if (m < 0.83) return TEMPERATE_DECIDUOUS_FOREST;

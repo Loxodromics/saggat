@@ -6,42 +6,38 @@ PlanetSurfaceMaterial {
     id: root
 
     property real diameter: 1.0
-    property real planetScale: Values.terrainPlanetScale
-    property real heightScale: Values.terrainHeightFactor
-    property real e0: Values.terrainE0
-    property real e1: Values.terrainE1
-    property real e2: Values.terrainE2
-    property real coldness: Values.terrainColdness
-    property int seed: Values.terrainSeed
-    property bool displayHeight: Values.displayHeight
 
     property color maincolor: Qt.rgba(0.0, 0.0, 0.0, 1.0)
     property Sun sun
 
+    QmlValues {
+        id: values
+    }
+
     parameters: [
         Parameter {
             name: "planetScale"
-            value: Values.terrainPlanetScale
+            value: values.terrainPlanetScale
         },
         Parameter {
             name: "heightScale"
-            value: Values.terrainHeightFactor
+            value: values.terrainHeightFactor
         },
         Parameter {
             name: "e0"
-            value: Values.terrainE0
+            value: values.terrainE0
         },
         Parameter {
             name: "e1"
-            value: Values.terrainE1
+            value: values.terrainE1
         },
         Parameter {
             name: "e2"
-            value: Values.terrainE2
+            value: values.terrainE2
         },
         Parameter {
             name: "displayHeight"
-            value: Values.terrainDisplayHeight
+            value: values.terrainDisplayHeight
         },
         Parameter {
             name: "diameter"
@@ -49,12 +45,17 @@ PlanetSurfaceMaterial {
         },
         Parameter {
             name: "coldness"
-            value: Values.terrainColdness
+            value: values.terrainColdness
         },
         Parameter {
             name: "seed"
-            value: Values.terrainSeed
+            value: values.terrainSeed
+        },
+        Parameter {
+            name: "seaLevel"
+            value: values.terrainSeaLevel
         }
+
     ]
 }
 

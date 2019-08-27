@@ -30,8 +30,8 @@ double SimplexNoiseElevationProvider::elevationAt(const double x, const double y
 	elevation = pow(elevation, Values::getInstance().terrainExp());
 
 	/// sea level cut off
-	if (elevation < 0.09 + static_cast<float>(Values::getInstance().terrainSeaLevelFactor()))
-		elevation = 0.09 + static_cast<float>(Values::getInstance().terrainSeaLevelFactor());
+	if (elevation < static_cast<float>(Values::getInstance().terrainSeaLevel()))
+		elevation = static_cast<float>(Values::getInstance().terrainSeaLevel());
 
 	if (elevation > m_max) {
 		m_max = elevation;

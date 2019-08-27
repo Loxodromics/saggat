@@ -13,8 +13,8 @@ QmlValues::QmlValues()
 {
 	QObject::connect(&Values::getInstance(), &Values::displayHeightChanged,
 					 this, &QmlValues::setTerrainDisplayHeight);
-	QObject::connect(&Values::getInstance(), &Values::terrainSeaLevelFactorChanged,
-					 this, &QmlValues::setTerrainSeaLevelFactor);
+	QObject::connect(&Values::getInstance(), &Values::terrainSeaLevelChanged,
+					 this, &QmlValues::setTerrainSeaLevel);
 	QObject::connect(&Values::getInstance(), &Values::terrainPlanetScaleChanged,
 					 this, &QmlValues::setTerrainPlanetScale);
 
@@ -32,10 +32,10 @@ QmlValues::QmlValues()
 					 this, &QmlValues::setTerrainSeed);
 }
 
-void QmlValues::setTerrainSeaLevelFactor(qreal terrainSeaLevelFactor)
+void QmlValues::setTerrainSeaLevel(qreal terrainSeaLevel)
 {
-	Values::getInstance().setTerrainSeaLevelFactor( terrainSeaLevelFactor );
-	emit terrainSeaLevelFactorChanged(Values::getInstance().terrainSeaLevelFactor());
+	Values::getInstance().setTerrainSeaLevel( terrainSeaLevel );
+	emit terrainSeaLevelChanged(Values::getInstance().terrainSeaLevel());
 }
 
 void QmlValues::setTerrainDisplayHeight(bool terrainDisplayHeight)
