@@ -42,11 +42,11 @@ Values::Values(QObject *parent)
 	  m_terrainE3(0.125),
 	  m_terrainE4(0.0625),
 	  m_terrainExp(1.0),
-	  m_terrainHeightFactor(0.2),
-	  m_terrainSeed(186),
+	  m_terrainHeightFactor(0.3),
+	  m_terrainSeed(319),
 	  m_terrainPlanetScale(1.0),
 	  m_displayHeight(false),
-	  m_terrainOctaves(4),
+	  m_terrainOctaves(3),
 	  m_terrainColdness(1.0),
 	  m_terrainSeaLevel(0.5)
 {

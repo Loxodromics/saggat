@@ -52,7 +52,7 @@ Entity {
         id: planetMesh
 
         radius: root.radius
-        subdivisions: 5
+        subdivisions: 6
     }
 
     Transform {
