@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
+        src/common/qmlvalues.cpp \
         src/common/values.cpp \
         src/generation/elevationprovider.cpp \
         src/generation/generator.cpp \
@@ -45,6 +46,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+        src/common/qmlvalues.h \
         src/common/values.h \
         src/generation/elevationprovider.h \
         src/generation/generator.h \

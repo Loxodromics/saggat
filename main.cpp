@@ -10,6 +10,7 @@
 #include <QQmlContext>
 #include <QSurface>
 #include "src/common/values.h"
+#include "src/common/qmlvalues.h"
 #include "src/generation/generator.h"
 #include "src/graphics/planetsurfacematerial.h"
 #include "src/graphics/moonsurfacematerial.h"
@@ -26,6 +27,7 @@ int main(int argc, char *argv[])
 
 	qmlRegisterType<Saggat::PlanetSurfaceMaterial>("Saggat", 1, 0, "PlanetSurfaceMaterial");
 	qmlRegisterType<Saggat::MoonSurfaceMaterial>("Saggat", 1, 0, "MoonSurfaceMaterial");
+	qmlRegisterType<Saggat::QmlValues>("Saggat", 1, 0, "QmlValues");
 	qmlRegisterType<GeosphereMesh>("LFD", 1, 0, "GeosphereMesh");
 
 	QGuiApplication app(argc, argv);
